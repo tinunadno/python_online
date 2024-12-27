@@ -1,4 +1,4 @@
-<script >
+<script>
   import PythonEditor from "@/components/parts/PythonEditor.vue";
 
   export default {
@@ -18,7 +18,8 @@
     },
     mounted() {
       // Проверяем сохранённую тему при загрузке страницы
-      // const savedTheme = localStorage.getItem("theme");
+
+      const savedTheme = localStorage.getItem("theme");
       this.isDarkTheme = savedTheme === "dark";
       this.applyTheme();
 
@@ -33,7 +34,7 @@
       },
       toggleTheme() {
         this.isDarkTheme = !this.isDarkTheme;
-        // localStorage.setItem("theme", this.isDarkTheme ? "dark" : "light");
+        localStorage.setItem("theme", this.isDarkTheme ? "dark" : "light");
         this.applyTheme();
       },
       applyTheme() {
@@ -41,7 +42,13 @@
         document.body.classList.toggle("dark-theme", this.isDarkTheme);
         this.$refs.codeEditor.setTheme(this.isDarkTheme ? "dracula": "3024-day");
       },
-    },
+      login() {
+        this.$router.push('/login');
+      },
+      registration() {
+        this.$router.push('/registration');
+      },
+    }
   };
 </script>
 
@@ -72,10 +79,10 @@
         </button>
       </div>
       <div class="reg-log">
-        <button  class="login-button">
+        <button @click="registration" class="login-button">
           Войти
         </button>
-        <button  class="register-button">
+        <button @click="login" class="register-button">
           Зарегистрироваться
         </button>
       </div>
