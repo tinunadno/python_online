@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.user_db_service.DTO.UserLoginRequest;
+import org.user_db_service.DTO.UserRegisterRequest;
 import org.user_db_service.services.UserAuthenticationService;
 
 @RestController
@@ -18,11 +19,20 @@ public class AuthenticationController {
 
     @PostMapping("/authorize")
     public ResponseEntity<?> authorize(@Valid @RequestBody UserLoginRequest request) {
-        return ResponseEntity.ok().body(userAuthenticationService.double_balls(request));
+        try {
+            Long id = userAuthenticationService.authorizeUser(request);
+            return ResponseEntity.ok(id);
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/register")
-    public String register() {
-        return "registered";
+    public ResponseEntity<?> register(@Valid @RequestBody UserRegisterRequest request) {
+        try {
+            return ResponseEntity.ok(userAuthenticationService.RegisterUser(request));
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
