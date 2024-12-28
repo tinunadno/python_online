@@ -3,9 +3,11 @@ package org.user_db_service.controllers;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.user_db_service.DTO.OkResponse;
 import org.user_db_service.DTO.UserLoginRequest;
 import org.user_db_service.DTO.UserRegisterRequest;
 import org.user_db_service.services.UserAuthenticationService;
+import org.user_db_service.DTO.ErrorResponse;
 
 @RestController
 @RequestMapping("/Authentication")
@@ -20,19 +22,24 @@ public class AuthenticationController {
     @PostMapping("/authorize")
     public ResponseEntity<?> authorize(@Valid @RequestBody UserLoginRequest request) {
         try {
-            Long id = userAuthenticationService.authorizeUser(request);
-            return ResponseEntity.ok(id);
+            Long userId = userAuthenticationService.authorizeUser(request);
+            OkResponse response = new OkResponse(userId.toString());
+            return ResponseEntity.ok(response);
         }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("error", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
         }
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserRegisterRequest request) {
         try {
-            return ResponseEntity.ok(userAuthenticationService.RegisterUser(request));
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+            Long userId = userAuthenticationService.RegisterUser(request);
+            OkResponse response = new OkResponse(userId.toString());
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            ErrorResponse errorResponse = new ErrorResponse("error", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
         }
     }
 }

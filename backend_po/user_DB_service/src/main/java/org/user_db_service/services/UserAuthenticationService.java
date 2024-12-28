@@ -23,11 +23,11 @@ public class UserAuthenticationService {
         UserEntity user = userRepository.findUserByUsername(userLoginRequest.getUsername());
 
         if(user == null){
-            throw new IllegalArgumentException("invalid username or password");
+            throw new IllegalArgumentException("user doesn't exist");
         }
 
         if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid username or password");
+            throw new IllegalArgumentException("Invalid password");
         }
 
         return user.getId();
