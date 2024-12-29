@@ -27,25 +27,27 @@ public class FileService {
         return fileEntity.getFileId();
     }
 
-    public byte[] getFileContents(ObjectId id) throws IllegalArgumentException{
-        FileEntity fileEntity = fileRepository.findByFileId(id);
+    public byte[] getFileContents(String id) throws IllegalArgumentException{
+        ObjectId fileID = new ObjectId(id);
+        FileEntity fileEntity = fileRepository.findByFileId(fileID);
         if(fileEntity == null){
-            throw new IllegalArgumentException("invalid file id");
+            throw new IllegalArgumentException("file with this id doesn't exist");
         }
         return fileEntity.getContents();
     }
 
     public void deleteFileContents(DeleteFileRequest deleteFileRequest) throws IllegalArgumentException{
-        if(!fileRepository.existsById(deleteFileRequest.getFileId())){
-            throw new IllegalArgumentException("invalid file id");
+        ObjectId fileId = new ObjectId(deleteFileRequest.getFileId());
+        if(!fileRepository.existsById(fileId)){
+            throw new IllegalArgumentException("file with this id doesn't exist");
         }
-        fileRepository.deleteById(deleteFileRequest.getFileId());
+        fileRepository.deleteById(fileId);
     }
 
     public void updateFileContents(UpdateFileContentRequest updateFileContentRequest) throws IllegalArgumentException{
-        FileEntity fileEntity = fileRepository.findByFileId(updateFileContentRequest.getFileId());
+        FileEntity fileEntity = fileRepository.findByFileId(new ObjectId(updateFileContentRequest.getFileId()));
         if(fileEntity == null){
-            throw new IllegalArgumentException("invalid file id");
+            throw new IllegalArgumentException("file with this id doesn't exist");
         }
         fileEntity.setContents(updateFileContentRequest.getContent().getBytes());
         fileEntity = fileRepository.save(fileEntity);

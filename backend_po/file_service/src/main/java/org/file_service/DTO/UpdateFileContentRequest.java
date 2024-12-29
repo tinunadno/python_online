@@ -7,18 +7,18 @@ import org.bson.types.ObjectId;
 public class UpdateFileContentRequest {
 
     @NotBlank(message = "file id is required")
-    @Pattern(regexp = "^[a-fA-F0-9]{24}$", message = "Invalid ObjectId format")
-    private ObjectId fileId;
+    @Pattern(regexp = "^[a-fA-F0-9]{24}$", message = "Invalid file id format")
+    private String fileId;
     @NotBlank(message = "content is required")
     private String content;
 
 
-    public UpdateFileContentRequest(ObjectId fileId, String content) {
+    public UpdateFileContentRequest(String fileId, String content) {
         this.fileId = fileId;
         this.content = content;
     }
 
-    public ObjectId getFileId() {
+    public String getFileId() {
         return fileId;
     }
 
@@ -26,7 +26,7 @@ public class UpdateFileContentRequest {
         return content;
     }
 
-    public void setFileId(ObjectId fileId) {
+    public void setFileId(String fileId) {
         this.fileId = fileId;
     }
 

@@ -31,7 +31,7 @@ public class FileController {
     }
 
     @GetMapping("/getFileContent")
-    ResponseEntity<?> getFileContent(@RequestParam("fileId") @NotBlank(message = "file id is required") @Pattern(regexp = "^[a-fA-F0-9]{24}$", message = "Invalid ObjectId format") ObjectId fileId){
+    ResponseEntity<?> getFileContent(@RequestParam(value = "fileId", required = true) @NotBlank(message = "file id is required") @Pattern(regexp = "^[a-fA-F0-9]{24}$", message = "Invalid file id format") String fileId){
         try{
             byte[] content = fileService.getFileContents(fileId);
             OkContentResponse response = new OkContentResponse(new String(content, StandardCharsets.UTF_8));
@@ -46,7 +46,8 @@ public class FileController {
     ResponseEntity<?> deleteFile(@Valid @RequestBody DeleteFileRequest deleteFileRequest){
         try{
             fileService.deleteFileContents(deleteFileRequest);
-            return ResponseEntity.ok().body("file was removed successfully");
+            OkResponse response = new OkResponse("file was removed successfully");
+            return ResponseEntity.ok().body(response);
         }catch (IllegalArgumentException e){
             ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
             return ResponseEntity.badRequest().body(errorResponse);
@@ -57,7 +58,8 @@ public class FileController {
     ResponseEntity<?> updateFileContent(@Valid @RequestBody UpdateFileContentRequest updateFileContentRequest){
         try{
             fileService.updateFileContents(updateFileContentRequest);
-            return ResponseEntity.ok().body("file was updated successfully");
+            OkResponse response = new OkResponse("file was updated successfully");
+            return ResponseEntity.ok().body(response);
         }catch (IllegalArgumentException e){
             ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
             return ResponseEntity.badRequest().body(errorResponse);
