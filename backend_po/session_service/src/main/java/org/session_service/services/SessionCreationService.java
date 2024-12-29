@@ -25,7 +25,7 @@ public class SessionCreationService {
     private int generateUniqueSessionId(String fileId) {
         int total_attempts = 0;
         int sessionId;
-        int max_attempts = 30;
+        int max_attempts = 5;
         do {
             sessionId = generateHashId(fileId);
             total_attempts++;
@@ -41,7 +41,7 @@ public class SessionCreationService {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = md.digest(fileId.getBytes());
             BigInteger hashValue = new BigInteger(1, hashBytes);
-            return (hashValue.mod(BigInteger.valueOf(1_000_000)).add(BigInteger.valueOf(100000)).intValue());
+            return (hashValue.mod(BigInteger.valueOf(900_000)).add(BigInteger.valueOf(100_000)).intValue());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("can't find SHA-256 algorithm", e);
         }

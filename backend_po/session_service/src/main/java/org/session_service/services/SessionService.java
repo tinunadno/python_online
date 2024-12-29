@@ -1,7 +1,7 @@
 package org.session_service.services;
 
 import org.session_service.DTO.CreateSessionRequest;
-import org.session_service.DTO.JoinSessionRequest;
+import org.session_service.DTO.DeleteSessionRequest;
 import org.session_service.entities.SessionEntity;
 import org.session_service.repositories.SessionRepository;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,13 +20,9 @@ public class SessionService {
         this.sessionCreationService = sessionCreationService;
     }
 
-    public Integer JoinSession(JoinSessionRequest joinSessionRequest) throws IllegalArgumentException {
-        SessionEntity sessionEntity;
-        try {
-            sessionEntity = sessionRepository.findSessionById(Integer.parseInt(joinSessionRequest.getSessionId()));
-        }catch (NumberFormatException e){
-            throw new IllegalArgumentException("Invalid session id");
-        }
+    public Integer JoinSession(String sessionId) throws IllegalArgumentException {
+        //session id format is already validated in controller
+        SessionEntity sessionEntity = sessionRepository.findSessionById(Integer.parseInt(sessionId));;
         if(sessionEntity == null) {
             throw new IllegalArgumentException("session with this id doesn't exist");
         }
@@ -47,5 +43,14 @@ public class SessionService {
         }catch(DataIntegrityViolationException e){
             throw new IllegalArgumentException("session with this id already exists");
         }
+    }
+
+    public void removeSession(DeleteSessionRequest deleteSessionRequest) throws IllegalArgumentException {
+        //session id format is already validated in DTO
+        SessionEntity sessionEntity =  sessionRepository.findSessionBySessionIdAndUserId(Integer.parseInt(deleteSessionRequest.getSessionId()), deleteSessionRequest.getUserId());
+        if(sessionEntity == null) {
+            throw new IllegalArgumentException("session with this id doesn't exist");
+        }
+        sessionRepository.delete(sessionEntity);
     }
 }
