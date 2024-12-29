@@ -1,6 +1,8 @@
 package org.file_service.services;
 
 import org.bson.types.ObjectId;
+import org.file_service.DTO.DeleteFileRequest;
+import org.file_service.DTO.UpdateFileContentRequest;
 import org.file_service.entities.FileEntity;
 import org.file_service.repositories.FileRepository;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,9 @@ public class FileService {
 
     private final FileRepository fileRepository;
 
-    public FileService(FileRepository fileRepository) {
+
+    public FileService(FileRepository fileRepository)
+    {
         this.fileRepository = fileRepository;
     }
 
@@ -31,11 +35,23 @@ public class FileService {
         return fileEntity.getContents();
     }
 
-    public void deleteFileContents(ObjectId id) throws IllegalArgumentException{
-        if(!fileRepository.existsById(id)){
+    public void deleteFileContents(DeleteFileRequest deleteFileRequest) throws IllegalArgumentException{
+        if(!fileRepository.existsById(deleteFileRequest.getFileId())){
             throw new IllegalArgumentException("invalid file id");
         }
-        fileRepository.deleteById(id);
+        fileRepository.deleteById(deleteFileRequest.getFileId());
+    }
+
+    public void updateFileContents(UpdateFileContentRequest updateFileContentRequest) throws IllegalArgumentException{
+        FileEntity fileEntity = fileRepository.findByFileId(updateFileContentRequest.getFileId());
+        if(fileEntity == null){
+            throw new IllegalArgumentException("invalid file id");
+        }
+        fileEntity.setContents(updateFileContentRequest.getContent().getBytes());
+        fileEntity = fileRepository.save(fileEntity);
+        if(fileEntity == null){
+            throw new RuntimeException("file wasn't saved");
+        }
     }
 
 }
