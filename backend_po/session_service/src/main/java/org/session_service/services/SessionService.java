@@ -13,9 +13,11 @@ import java.text.ParseException;
 public class SessionService {
 
     private final SessionRepository sessionRepository;
+    private SessionCreationService sessionCreationService;
 
-    public SessionService(SessionRepository sessionRepository) {
+    public SessionService(SessionRepository sessionRepository, SessionCreationService sessionCreationService) {
         this.sessionRepository = sessionRepository;
+        this.sessionCreationService = sessionCreationService;
     }
 
     public Integer JoinSession(JoinSessionRequest joinSessionRequest) throws IllegalArgumentException {
@@ -33,7 +35,12 @@ public class SessionService {
     }
 
     public Integer saveSession(CreateSessionRequest createSessionRequest) throws IllegalArgumentException {
-        SessionEntity sessionEntity = new SessionEntity(createSessionRequest.getUserId(), createSessionRequest.getSessionFileId());
+        SessionEntity sessionEntity;
+        try {
+            sessionEntity = sessionCreationService.createSessionEntity(createSessionRequest.getUserId(), createSessionRequest.getSessionFileId());
+        }catch (RuntimeException e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
         try{
             SessionEntity SavedSessionEntity = sessionRepository.save(sessionEntity);
             return SavedSessionEntity.getSessionId();

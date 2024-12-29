@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.util.Random;
 
 @Entity
 @Table(name = "sessions")
@@ -20,15 +19,10 @@ public class SessionEntity {
 
     public SessionEntity() {}
 
-    public SessionEntity(String userId, String sessionFileId) {
-        sessionId = generateRandomSessionId();
+    public SessionEntity(Integer sessionId, String userId, String sessionFileId) {
+        this.sessionId = sessionId;
         this.userId = userId;
         this.sessionFileId = sessionFileId;
-    }
-
-    private Integer generateRandomSessionId() {
-        Random random = new Random();
-        return 100000 + random.nextInt(900000); // генерирует случайное 6-значное число
     }
 
     public Integer getSessionId() {
