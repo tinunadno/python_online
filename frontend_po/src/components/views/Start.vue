@@ -79,10 +79,10 @@
         </button>
       </div>
       <div class="reg-log">
-        <button @click="registration" class="login-button">
+        <button @click="login" class="login-button">
           Войти
         </button>
-        <button @click="login" class="register-button">
+        <button @click="registration" class="register-button">
           Зарегистрироваться
         </button>
       </div>
@@ -149,6 +149,9 @@ body {
   flex-direction: row;
 }
 
+label{
+  color: var(--bg-color);
+}
 
 button{
   background: var(--bg-button-color);
