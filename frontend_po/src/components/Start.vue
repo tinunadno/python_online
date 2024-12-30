@@ -3,13 +3,11 @@
 </script>
 
 <template>
-<div>
-  <h1>
-    Вход
-  </h1>
-</div>
+  <h1>ЭТО НАЧАЛО КОНЦА</h1>
 </template>
 
 <style scoped>
-
+  h1{
+    color: #CC00DD;
+  }
 </style>
