@@ -2,10 +2,7 @@ package org.user_db_service.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.user_db_service.DTO.ErrorResponse;
 import org.user_db_service.DTO.OkResponse;
 import org.user_db_service.DTO.UserDeleteRequest;
@@ -27,7 +24,7 @@ public class UserDeleteController {
             userDeleteService.deleteUser(userDeleteRequest);
             return ResponseEntity.ok(new OkResponse("User deleted successfully"));
         }catch(IllegalArgumentException e){
-            ErrorResponse response = new ErrorResponse("message", e.getMessage());
+            ErrorResponse response = new ErrorResponse("error", e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }

@@ -149,7 +149,7 @@ class UserDbServiceApplicationTests {
 
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 
-		assertEquals("Password is required", response.getBody().get("message"));
+		assertEquals("Password length must be at least 8 characters", response.getBody().get("message"));
 
 		request = new HashMap<>();
 		request.put("username", "testUsername3");
@@ -208,6 +208,85 @@ class UserDbServiceApplicationTests {
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 
 		assertEquals("Password length must be at least 8 characters", response.getBody().get("message"));
+	}
+
+	@Test
+	void deleteUserTestNormalBehaviour(){
+		Map<String, String> request = new HashMap<>();
+		request.put("username", "testUsername5");
+		request.put("email", "asd@mail.ru");
+		request.put("password", "12345678");
+
+		ResponseEntity<Map> response = testRestTemplate.postForEntity(
+				"/Authentication/register",
+				request,
+				Map.class
+		);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+
+		response = testRestTemplate.postForEntity(
+				"/userManagement/deleteUser",
+				request,
+				Map.class
+		);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+
+	@Test
+	void deleteUserTestWrongPassword(){
+		Map<String, String> request = new HashMap<>();
+		request.put("username", "testUsername5");
+		request.put("email", "asd@mail.ru");
+		request.put("password", "12345678");
+
+		ResponseEntity<Map> response = testRestTemplate.postForEntity(
+				"/Authentication/register",
+				request,
+				Map.class
+		);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+
+		request.put("password", "1233333333333333");
+
+		response = testRestTemplate.postForEntity(
+				"/userManagement/deleteUser",
+				request,
+				Map.class
+		);
+
+		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+		assertEquals("Passwords do not match", response.getBody().get("message"));
+
+		request.put("password", "12345678");
+
+		response = testRestTemplate.postForEntity(
+				"/userManagement/deleteUser",
+				request,
+				Map.class
+		);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+
+	@Test
+	void deleteUserTestWrongUserName(){
+		Map<String, String> request = new HashMap<>();
+		request.put("username", "testUsername5");
+		request.put("password", "12345678");
+
+
+		ResponseEntity<Map> response = testRestTemplate.postForEntity(
+				"/userManagement/deleteUser",
+				request,
+				Map.class
+		);
+
+		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+		assertEquals("User with this name doesn't exist", response.getBody().get("message"));
+
 	}
 
 	@AfterAll
