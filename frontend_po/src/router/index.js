@@ -1,12 +1,8 @@
-import {createRouter, createWebHistory} from "vue-router";
-import Start from "@/components/views/Start.vue";
-import Login from "@/components/views/Login.vue";
-import Registration from "@/components/views/Registration.vue";
+import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
+import Start from "@/components/Start.vue";
 
 const routes = [
-    { path: '/', name: 'Start', component: Start },
-    { path: '/login', name: 'Login', component: Login },
-    { path: '/registration', name: 'Registration', component: Registration },
+    {path: '/', name: Start, component: Start}
 ]
 
 const router = createRouter({
