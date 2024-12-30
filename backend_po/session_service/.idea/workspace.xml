@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2qtZhL1vtNqR7XhmOQF3vlGlcsH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.SessionServiceApplicationTests.deleteSessionTestSessionNotExist.executor": "Run",
+    "JUnit.SessionServiceApplicationTests.executor": "Run",
+    "JUnit.SessionServiceApplicationTests.joinSessionTestInvalidSessionId.executor": "Debug",
+    "JUnit.SessionServiceApplicationTests.joinSessionTestNormalBehavior.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.SessionServiceApplication.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "file__service__branch",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/yura/Applications/intellij/ideaProjects/python_online/backend_po/session_service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.SessionServiceApplicationTests">
+    <configuration name="SessionServiceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="session_service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.session_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.session_service" />
+      <option name="MAIN_CLASS_NAME" value="org.session_service.SessionServiceApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionServiceApplicationTests.deleteSessionTestSessionNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="session_service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.session_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.session_service" />
+      <option name="MAIN_CLASS_NAME" value="org.session_service.SessionServiceApplicationTests" />
+      <option name="METHOD_NAME" value="deleteSessionTestSessionNotExist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionServiceApplicationTests.joinSessionTestInvalidSessionId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="session_service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.session_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.session_service" />
+      <option name="MAIN_CLASS_NAME" value="org.session_service.SessionServiceApplicationTests" />
+      <option name="METHOD_NAME" value="joinSessionTestInvalidSessionId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionServiceApplicationTests.joinSessionTestNormalBehavior" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="session_service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.session_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.session_service" />
+      <option name="MAIN_CLASS_NAME" value="org.session_service.SessionServiceApplicationTests" />
+      <option name="METHOD_NAME" value="joinSessionTestNormalBehavior" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="session_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.session_service.SessionServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SessionServiceApplicationTests" />
+        <item itemvalue="JUnit.SessionServiceApplicationTests.joinSessionTestInvalidSessionId" />
+        <item itemvalue="JUnit.SessionServiceApplicationTests.joinSessionTestNormalBehavior" />
+        <item itemvalue="JUnit.SessionServiceApplicationTests.deleteSessionTestSessionNotExist" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="" />
+      <created>1735483952697</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1735483952697</updated>
+      <workItem from="1735483953750" duration="12349000" />
+      <workItem from="1735501362256" duration="82000" />
+      <workItem from="1735501660896" duration="1347000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/org/session_service/SessionServiceApplicationTests.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
