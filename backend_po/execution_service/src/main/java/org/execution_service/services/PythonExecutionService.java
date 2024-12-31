@@ -1,5 +1,6 @@
 package org.execution_service.services;
 
+import jakarta.annotation.PreDestroy;
 import org.execution_service.DTO.ExecutionRequest;
 import org.execution_service.DTO.ExecutionResponse;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class PythonExecutionService {
         this.responseSenderService = responseSenderService;
     }
 
+    @PreDestroy
+    public void stopProcessingQueue() {
+        executorService.shutdown();
+    }
+
     public void startExecution(ExecutionRequest executionRequest) {
         executorService.submit(() -> {
             ExecutionResponse executionResponse;
@@ -40,30 +46,64 @@ public class PythonExecutionService {
     }
 
     private String executePythonScript(String script) throws RuntimeException, IOException, InterruptedException {
+        Process process = null;
 
+        try {
+            ProcessBuilder pb = new ProcessBuilder("python3", "-c", script);
+            process = pb.start();
 
+            System.out.println("\n\nStarted process with PID: " + process.pid());
 
-        ProcessBuilder pb = new ProcessBuilder("python3", "-c", script);
-        Process process = pb.start();
+            BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader stderrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        StringBuilder output = new StringBuilder();
-        String line;
-        while ((line = stdoutReader.readLine()) != null) {
-            output.append(line);
+            StringBuilder output = new StringBuilder();
+            StringBuilder errors = new StringBuilder();
+
+            Thread stdoutThread = new Thread(() -> {
+                try {
+                    String line;
+                    while ((line = stdoutReader.readLine()) != null) {
+                        output.append(line).append("\n");
+                    }
+                } catch (IOException ignored) {
+                }
+            });
+
+            Thread stderrThread = new Thread(() -> {
+                try {
+                    String line;
+                    while ((line = stderrReader.readLine()) != null) {
+                        errors.append(line).append("\n");
+                    }
+                } catch (IOException ignored) {
+                }
+            });
+
+            stdoutThread.start();
+            stderrThread.start();
+
+            boolean finishedInTime = process.waitFor(2, TimeUnit.SECONDS);
+            if (!finishedInTime) {
+                process.destroyForcibly();
+                stdoutThread.join();
+                stderrThread.join();
+                throw new RuntimeException("process timeout, check for infinite loops, and infinite recursion");
+            }
+
+            stdoutThread.join();
+            stderrThread.join();
+
+            int exitCode = process.exitValue();
+            if (exitCode != 0) {
+                throw new RuntimeException("errors on execution, execution code: " + exitCode + ", errors: " + errors);
+            }
+
+            return output.toString();
+        }finally {
+            if(process != null && process.isAlive()){
+                process.destroyForcibly();
+            }
         }
-
-        BufferedReader stderrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-        StringBuilder errors = new StringBuilder();
-        while ((line = stderrReader.readLine()) != null) {
-            errors.append(line);
-        }
-
-        boolean exitCode = process.waitFor(2, TimeUnit.SECONDS);
-        if (!exitCode) {
-            throw new RuntimeException("Ошибка выполнения скрипта: " + errors);
-        }
-
-        return output.toString();
     }
 }

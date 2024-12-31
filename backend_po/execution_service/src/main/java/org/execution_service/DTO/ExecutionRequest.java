@@ -1,6 +1,7 @@
 package org.execution_service.DTO;
 
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 public class ExecutionRequest {
 
@@ -8,6 +9,7 @@ public class ExecutionRequest {
     private String executableFile;
 
     @NotBlank(message = "response url is required")
+    @URL(message = "response url is invalid")
     private String responseUrl;
 
     public ExecutionRequest(String executableFile, String responseUrl) {
