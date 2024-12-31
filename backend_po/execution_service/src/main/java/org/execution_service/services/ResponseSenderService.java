@@ -31,6 +31,11 @@ public class ResponseSenderService {
         });
     }
 
+    @PreDestroy
+    public void stopProcessingQueue() {
+        sendingExecutor.shutdown();
+    }
+
 
     public void sendResponse(ExecutionResponse executionResponse, String responseUrl){
         sendingQueue.add(new SendingResponseTask(executionResponse, responseUrl));
@@ -48,11 +53,6 @@ public class ResponseSenderService {
         } catch (Exception e) {
             System.err.println("error while response processing " + e.getMessage() + "\n" + responseUrl + "\n");
         }
-    }
-
-    @PreDestroy
-    public void stopProcessingQueue() {
-        sendingExecutor.shutdown();
     }
 
 
