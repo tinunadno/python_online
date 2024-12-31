@@ -170,13 +170,30 @@ class ExecutionServiceApplicationTests {
 	}
 
 
+	void infiniteLoopTestWithOutAwait(){
+		String executingFile = "while(1):" +
+				"	pass";
+
+		Map<String, String> request = new HashMap<>();
+		request.put("executableFile", executingFile);
+		request.put("responseUrl", String.format("http://localhost:%d/testController/saveResponse", port));
+
+		testRestTemplate.postForEntity(
+				"/executionAPI/executeFile",
+				request,
+				Map.class
+		);
+	}
+
 	//Just to see if server wouldn't die
+	//this will be really hard for my laptop
 	@Test
 	void rushExecutionTest(){
-		for(int i =0; i < 50; i++){
+		for(int i =0; i < 500; i++){
 			System.out.println("running infinite loop test № "+i);
-			infiniteLoopExecutionTest();
+			infiniteLoopTestWithOutAwait();
 		}
+		//to make sure, that all the responses are sended and server will not send any responses to shutdowned test server
 		try{
 			Thread.sleep(10000);
 		}catch (InterruptedException e){

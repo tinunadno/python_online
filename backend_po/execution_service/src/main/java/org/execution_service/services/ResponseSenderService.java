@@ -52,23 +52,7 @@ public class ResponseSenderService {
 
     @PreDestroy
     public void stopProcessingQueue() {
-        while (!sendingQueue.isEmpty()) {
-            try {
-                Thread.sleep(100); // Небольшая пауза для проверки состояния очереди
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.err.println("queue was interrupted!");
-            }
-        }
-        sendingExecutor.shutdown(); // Закрытие ExecutorService
-        try {
-            if (!sendingExecutor.awaitTermination(10, TimeUnit.SECONDS)) {
-                System.err.println("failed to finish queue processing in time");
-            }
-        } catch (InterruptedException e) {
-            System.err.println("queue await was interrupted");
-            Thread.currentThread().interrupt();
-        }
+        sendingExecutor.shutdown();
     }
 
 
