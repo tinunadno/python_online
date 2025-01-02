@@ -7,13 +7,11 @@
     <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../file_service/src/main/java/org/file_service/DTO/DeleteFileRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/src/main/java/org/file_service/DTO/DeleteFileRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../file_service/target/classes/org/file_service/DTO/DeleteFileRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/target/classes/org/file_service/DTO/DeleteFileRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/session_service/controllers/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/session_service/controllers/SessionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/session_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/session_service/services/RequestSendingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/session_service/services/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/session_service/services/SessionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/session_service/SessionServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/session_service/SessionServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/cleanup.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/cleanup.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +79,7 @@
       <recent name="org.session_service.services" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SessionServiceApplication">
+  <component name="RunManager" selected="JUnit.SessionServiceApplicationTests">
     <configuration name="SessionServiceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="session_service" />
       <extension name="coverage">
@@ -181,7 +179,8 @@
       <workItem from="1735501362256" duration="82000" />
       <workItem from="1735501660896" duration="1347000" />
       <workItem from="1735801852134" duration="3402000" />
-      <workItem from="1735805679603" duration="1730000" />
+      <workItem from="1735805679603" duration="1907000" />
+      <workItem from="1735827696689" duration="330000" />
     </task>
     <servers />
   </component>
