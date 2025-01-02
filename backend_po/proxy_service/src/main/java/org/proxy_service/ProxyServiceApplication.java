@@ -1,4 +1,4 @@
-package org.proxy_service;
+ package org.proxy_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
