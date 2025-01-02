@@ -15,7 +15,7 @@ public class RequestSendingService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public ResponseEntity<?> sendPostRequestProxy(String url, Map<String, String> request){
+    public ResponseEntity<Map> sendPostRequestAsMap(String url, Map<String, String> request){
         return restTemplate.postForEntity(url, request, Map.class);
     }
 
@@ -28,16 +28,6 @@ public class RequestSendingService {
         }
 
         return restTemplate.postForEntity(url, requestBody, Map.class);
-    }
-
-    public ResponseEntity<Map> sendGetRequest(String url, Object request) {
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url);
-
-        Map<String, Object> paramMap = objectMapper.convertValue(request, Map.class);
-        paramMap.forEach(uriBuilder::queryParam);
-
-        String finalUrl = uriBuilder.toUriString();
-        return restTemplate.getForEntity(finalUrl, Map.class);
     }
 }
 
