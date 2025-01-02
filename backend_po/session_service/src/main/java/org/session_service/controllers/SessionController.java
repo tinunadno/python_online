@@ -43,6 +43,18 @@ public class SessionController {
         }
     }
 
+    @GetMapping("/getSessionFileId")
+    public ResponseEntity<?> getFileSessionId(@RequestParam("sessionId") @Pattern(regexp = "^[0-9]{6}$", message = "session id must be 6 digit integer") String sessionId) {
+        try{
+            String fileSessionId = sessionService.getSessionFileId(sessionId);
+            OkResponse response = new OkResponse(fileSessionId);
+            return ResponseEntity.ok(response);
+        }catch (IllegalArgumentException e){
+            ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+
     @PostMapping("/deleteSession")
     public ResponseEntity<?> deleteSession(@Valid @RequestBody DeleteSessionRequest deleteSessionRequest){
         try{

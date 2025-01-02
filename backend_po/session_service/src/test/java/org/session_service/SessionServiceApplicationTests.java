@@ -25,8 +25,7 @@ class SessionServiceApplicationTests {
 	@Test
 	void createSessionTestNormalBehavior() {
 		Map<String, String> request = new HashMap<>();
-		request.put("userId", "123456");
-		request.put("sessionFileId", "111111111111111111111111");
+		request.put("userId", "-1");
 
 		ResponseEntity<Map> response =  restTemplate.postForEntity(
 				"/sessionAPI/createSession",
@@ -38,26 +37,9 @@ class SessionServiceApplicationTests {
 	}
 
 	@Test
-	void createSessionTestTooSmallFileDescriptor() {
-		Map<String, String> request = new HashMap<>();
-		request.put("userId", "123456");
-		request.put("sessionFileId", "1111111111");
-
-		ResponseEntity<Map> response =  restTemplate.postForEntity(
-				"/sessionAPI/createSession",
-				request,
-				Map.class
-		);
-
-		assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
-		assertEquals(response.getBody().get("message"), "file id length must be 24 characters");
-	}
-
-	@Test
 	void joinSessionTestNormalBehavior() {
 		Map<String, String> request = new HashMap<>();
-		request.put("userId", "123456");
-		request.put("sessionFileId", "111111111111111111111112");
+		request.put("userId", "-2");
 
 		ResponseEntity<Map> response =  restTemplate.postForEntity(
 				"/sessionAPI/createSession",
@@ -91,8 +73,7 @@ class SessionServiceApplicationTests {
 	@Test
 	void deleteSessionTestNormalBehavior() {
 		Map<String, String> request = new HashMap<>();
-		request.put("userId", "123456");
-		request.put("sessionFileId", "111111111111111111111113");
+		request.put("userId", "-3");
 
 		ResponseEntity<Map> response =  restTemplate.postForEntity(
 				"/sessionAPI/createSession",
@@ -105,7 +86,7 @@ class SessionServiceApplicationTests {
 		String sessionId = response.getBody().get("sessionId").toString();
 
 		request = new HashMap<>();
-		request.put("userId", "123456");
+		request.put("userId", "-3");
 		request.put("sessionId", sessionId);
 
 		response =  restTemplate.postForEntity(
@@ -137,7 +118,6 @@ class SessionServiceApplicationTests {
 	void deleteSessionTestSessionNotExist(){
 		Map<String, String> request = new HashMap<>();
 		request.put("userId", "123456");
-		request.put("sessionFileId", "111111111111111111111114");
 
 		ResponseEntity<Map> response =  restTemplate.postForEntity(
 				"/sessionAPI/createSession",

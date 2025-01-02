@@ -1,2 +1,1 @@
-DELETE FROM sessions WHERE session_file_id = '111111111111111111111111' OR session_file_id = '111111111111111111111112'
-OR session_file_id = '111111111111111111111113' OR session_file_id = '111111111111111111111114';
+DELETE FROM sessions WHERE user_id = '-1' OR user_id = '-2' OR user_id = '-3' OR user_id = '123456';
