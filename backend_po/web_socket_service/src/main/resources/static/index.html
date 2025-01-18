@@ -17,14 +17,10 @@
 
 <div id="chatSection" style="display:none;">
     <h2 id="chatTitle"></h2>
+    <textarea id="fileContent" readonly style="width: 100%; height: 200px;" placeholder="Содержимое файла"></textarea>
     <input id="messageInput" type="text" placeholder="Введите сообщение">
     <button onclick="sendMessage()">Отправить</button>
-    <button onclick="executeFile()">Исполнить</button>
     <ul id="messages"></ul>
-    <div id="fileContent" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
-        <h3>Актуальная версия файла:</h3>
-        <pre id="fileContentText"></pre> <!-- Тут будет отображаться файл -->
-    </div>
 </div>
 
 <script>
@@ -54,10 +50,8 @@
                 showMessage(message.body);
             });
 
-            // Подписка на получение актуальной версии файла только для этого пользователя
-            stompClient.subscribe('/user/queue/file', function (message) {
-                showFile(message.body);
-            });
+            // Запрос актуального содержимого файла через REST-контроллер
+            fetchFileContent(chatId);
         });
     }
 
@@ -68,30 +62,22 @@
         }
     }
 
-    function executeFile() {
-        if (!chatId) {
-            alert("Сначала подключитесь к чату!");
-            return;
-        }
-
-        // Выполняем POST-запрос с chatId в заголовках
-        fetch(`/webSocketServiceController/executeFile/${chatId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'chatId': chatId  // Передаем chatId в заголовках
-            },
-            body: JSON.stringify({}) // Тело запроса, можно передать дополнительные данные если нужно
-        })
+    function fetchFileContent(chatId) {
+        fetch(`/webSocketServiceController/getFileContent/${chatId}`)
             .then(response => {
                 if (response.ok) {
-                    alert("Файл успешно отправлен на выполнение!");
+                    return response.text();
                 } else {
-                    response.text().then(text => alert("Ошибка выполнения: " + text));
+                    throw new Error("Ошибка при получении файла: " + response.status);
                 }
             })
+            .then(fileContent => {
+                // Отобразить содержимое файла в textarea
+                document.getElementById('fileContent').value = fileContent;
+            })
             .catch(error => {
-                alert("Ошибка запроса: " + error.message);
+                console.error("Ошибка при запросе содержимого файла:", error);
+                alert("Не удалось загрузить файл.");
             });
     }
 
@@ -100,11 +86,6 @@
         const li = document.createElement('li');
         li.appendChild(document.createTextNode(message));
         messages.appendChild(li);
-    }
-
-    function showFile(fileContent) {
-        const fileContentText = document.getElementById('fileContentText');
-        fileContentText.textContent = fileContent;  // Отображаем полученный файл в <pre> для форматированного текста
     }
 </script>
 </body>

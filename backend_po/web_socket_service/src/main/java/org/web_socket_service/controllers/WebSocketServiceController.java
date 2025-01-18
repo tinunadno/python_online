@@ -6,17 +6,20 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.web_socket_service.DTO.ExecutionServiceResponse;
 import org.web_socket_service.services.ExecutionMicroServiceInteractionService;
+import org.web_socket_service.services.TemporaryFileStorageService;
 
 @RestController
 @RequestMapping("/webSocketServiceController")
-public class ExecutionController {
+public class WebSocketServiceController {
 
+    private final TemporaryFileStorageService temporaryFileStorageService;
     private final SimpMessagingTemplate messagingTemplate;
     private final ExecutionMicroServiceInteractionService executionMicroServiceInteractionService;
 
-    public ExecutionController(SimpMessagingTemplate messagingTemplate, ExecutionMicroServiceInteractionService executionMicroServiceInteractionService) {
+    public WebSocketServiceController(SimpMessagingTemplate messagingTemplate, ExecutionMicroServiceInteractionService executionMicroServiceInteractionService, TemporaryFileStorageService temporaryFileStorageService) {
         this.messagingTemplate = messagingTemplate;
         this.executionMicroServiceInteractionService = executionMicroServiceInteractionService;
+        this.temporaryFileStorageService = temporaryFileStorageService;
     }
 
     @PostMapping("/executeFile/{chatId}")
@@ -35,4 +38,8 @@ public class ExecutionController {
         messagingTemplate.convertAndSend("/topic/chat/" + chatId, "execution result: " + executionServiceResponse.getExecutionOutput());
     }
 
+    @GetMapping("/getFileContent/{chatId}")
+    public ResponseEntity<String> getFileContent(@PathVariable String chatId) {
+        return new ResponseEntity<>(temporaryFileStorageService.getSessionFile(chatId), HttpStatus.OK);
+    }
 }
