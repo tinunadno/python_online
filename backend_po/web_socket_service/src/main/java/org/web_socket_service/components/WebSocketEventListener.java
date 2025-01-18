@@ -20,17 +20,17 @@ public class WebSocketEventListener {
         this.temporaryFileStorageService = temporaryFileStorageService;
     }
 
-    @EventListener
-    public void handleWebSocketConnectListener(SessionConnectEvent event) {
-        StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
-        String humanReadableSessionId = accessor.getFirstNativeHeader("sessionId");
-        String webSocketSessionId = accessor.getSessionId();
-        if(humanReadableSessionId!=null && webSocketSessionId!=null) {
-            activeUserTracker.addConnection( webSocketSessionId, humanReadableSessionId);
-            temporaryFileStorageService.addSession(humanReadableSessionId);
-        }
+        @EventListener
+        public void handleWebSocketConnectListener(SessionConnectEvent event) {
+            StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
+            String humanReadableSessionId = accessor.getFirstNativeHeader("sessionId");
+            String webSocketSessionId = accessor.getSessionId();
+            if(humanReadableSessionId!=null && webSocketSessionId!=null) {
+                activeUserTracker.addConnection( webSocketSessionId, humanReadableSessionId);
+                temporaryFileStorageService.addSession(humanReadableSessionId);
+            }
 
-    }
+        }
 
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
@@ -39,7 +39,7 @@ public class WebSocketEventListener {
         if(activeUserTracker.decrementConnection(webSocketSessionId) == 0){
             String humanReadableSessionId = activeUserTracker.getHumanReadableSessionId(webSocketSessionId);
             activeUserTracker.removeConnection(webSocketSessionId);
-            temporaryFileStorageService.removeFile(humanReadableSessionId);
+            temporaryFileStorageService.closeTemporarySessionStorage(humanReadableSessionId);
         }
     }
 

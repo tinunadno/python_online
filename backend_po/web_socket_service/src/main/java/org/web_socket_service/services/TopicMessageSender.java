@@ -12,7 +12,6 @@ public class TopicMessageSender {
         this.messagingTemplate = messagingTemplate;
     }
 
-    //a little bit bad move
     public void sendMessage(Object responseBody, String sessionId){
         messagingTemplate.convertAndSend("/topic/session/" + sessionId, responseBody);
     }

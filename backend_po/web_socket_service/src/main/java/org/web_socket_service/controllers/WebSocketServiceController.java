@@ -41,6 +41,8 @@ public class WebSocketServiceController {
 
     @GetMapping("/getFileContent/{sessionId}")
     public ResponseEntity<?> getFileContent(@PathVariable String sessionId) {
-        return new ResponseEntity<>(new FileContentResponse(temporaryFileStorageService.getSessionFile(sessionId)), HttpStatus.OK);
+        String content = temporaryFileStorageService.getSessionFile(sessionId);
+        FileContentResponse fileContentResponse = new FileContentResponse(content);
+        return new ResponseEntity<>(fileContentResponse, HttpStatus.OK);
     }
 }

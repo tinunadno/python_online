@@ -8,53 +8,38 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class ActiveUserTracker {
 
-    private final ConcurrentHashMap<String, SessionInstance> activeConnections = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, AtomicInteger> activeConnections = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, String> sessionIds = new ConcurrentHashMap<>();
 
-    public void addConnection(String webSocketSessionId, String humanReadableSessionId) {
-        if(!activeConnections.containsKey(webSocketSessionId)) {
-            activeConnections.put(webSocketSessionId, new SessionInstance(humanReadableSessionId));
+    public void addConnection(String webSocketSessionId, String humanReadableId) {
+        if(!activeConnections.containsKey(humanReadableId)) {
+            activeConnections.put(humanReadableId, new AtomicInteger(0));
+            sessionIds.put(webSocketSessionId, humanReadableId);
         }
-        activeConnections.get(webSocketSessionId).addUser();
+        activeConnections.get(humanReadableId).incrementAndGet();
+        sessionIds.put(webSocketSessionId, humanReadableId);
     }
 
 
-    public int decrementConnection(String sessionId) {
-        if(activeConnections.containsKey(sessionId)) {
-            return activeConnections.get(sessionId).removeUser();
+    public int decrementConnection(String webSocketSessionId) {
+        if(sessionIds.containsKey(webSocketSessionId)) {
+            String humanReadableId = sessionIds.get(webSocketSessionId);
+            if(activeConnections.containsKey(humanReadableId)) {
+                return activeConnections.get(humanReadableId).decrementAndGet();
+            }
         }
         return -1;
     }
 
     public String getHumanReadableSessionId(String webSocketSessionId) {
-        if(activeConnections.containsKey(webSocketSessionId)) {
-            return activeConnections.get(webSocketSessionId).getSessionId();
-        }
-        return null;
+        return sessionIds.get(webSocketSessionId);
     }
 
     public void removeConnection(String webSocketSessionId) {
-        activeConnections.remove(webSocketSessionId);
-    }
-
-    private static class SessionInstance{
-        private final AtomicInteger activeConnectionsCount;
-        private final String sessionId;
-
-        public SessionInstance(String sessionId) {
-            this.sessionId = sessionId;
-            activeConnectionsCount = new AtomicInteger(0);
-        }
-
-        public void addUser(){
-            this.activeConnectionsCount.incrementAndGet();
-        }
-
-        public int removeUser(){
-            return this.activeConnectionsCount.decrementAndGet();
-        }
-
-        public String getSessionId() {
-            return sessionId;
+        if(sessionIds.containsKey(webSocketSessionId)) {
+            String humanReadableId = sessionIds.get(webSocketSessionId);
+            sessionIds.remove(webSocketSessionId);
+            activeConnections.remove(humanReadableId);
         }
     }
 }
