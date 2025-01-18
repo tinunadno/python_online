@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Multi-Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<h1>WebSocket Multi-Chat</h1>
+<div id="connectSection">
+    <label for="chatIdInput">Введите номер чата:</label>
+    <input id="chatIdInput" type="text" placeholder="Например, 1">
+    <button onclick="connect()">Подключиться</button>
+</div>
+
+<div id="chatSection" style="display:none;">
+    <h2 id="chatTitle"></h2>
+    <textarea id="fileContent" readonly style="width: 100%; height: 200px;" placeholder="Содержимое файла"></textarea>
+    <input id="messageInput" type="text" placeholder="Введите сообщение">
+    <button onclick="sendMessage()">Отправить</button>
+    <button onclick="executeFile()">Исполнить</button>
+    <ul id="messages"></ul>
+</div>
+
+<script>
+    let stompClient = null;
+    let chatId = null;
+
+    function connect() {
+        chatId = document.getElementById('chatIdInput').value;
+        if (!chatId) {
+            alert("Введите номер чата!");
+            return;
+        }
+
+        const socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({'sessionId': chatId}, function (frame) {
+            console.log('Подключено к чату: ' + chatId);
+
+            // Отображаем секцию чата
+            document.getElementById('connectSection').style.display = 'none';
+            document.getElementById('chatSection').style.display = 'block';
+            document.getElementById('chatTitle').innerText = 'Чат ' + chatId;
+
+            // Подписываемся на топик чата
+            stompClient.subscribe('/topic/session/' + chatId, function (message) {
+                showMessage(message.body);
+            });
+
+            // Запрос актуального содержимого файла через REST-контроллер
+            //hehe its sleep
+            for(let i =0; i<= 10001; i++){
+                console.log("asd");
+            }
+            fetchFileContent(chatId);
+        });
+    }
+
+    function executeFile() {
+        if (!chatId) {
+            alert("Сначала подключитесь к чату!");
+            return;
+        }
+
+        // Выполняем POST-запрос с chatId в заголовках
+        fetch(`/webSocketServiceController/executeFile/${chatId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'chatId': chatId  // Передаем chatId в заголовках
+            },
+            body: JSON.stringify({}) // Тело запроса, можно передать дополнительные данные если нужно
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Файл успешно отправлен на выполнение!");
+                } else {
+                    response.text().then(text => alert("Ошибка выполнения: " + text));
+                }
+            })
+            .catch(error => {
+                alert("Ошибка запроса: " + error.message);
+            });
+    }
+
+    function sendMessage() {
+        const message = document.getElementById('messageInput').value;
+        if (message && stompClient) {
+            stompClient.send('/app/session/' + chatId, {}, message);
+        }
+    }
+
+    function fetchFileContent(chatId) {
+        fetch(`/webSocketServiceController/getFileContent/${chatId}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error("Ошибка при получении файла: " + response.status);
+                }
+            })
+            .then(fileContent => {
+                // Отобразить содержимое файла в textarea
+                document.getElementById('fileContent').value = fileContent;
+            })
+            .catch(error => {
+                console.error("Ошибка при запросе содержимого файла:", error);
+                alert("Не удалось загрузить файл.");
+            });
+    }
+
+    function showMessage(message) {
+        const messages = document.getElementById('messages');
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(message));
+        messages.appendChild(li);
+    }
+</script>
+</body>
+</html>
