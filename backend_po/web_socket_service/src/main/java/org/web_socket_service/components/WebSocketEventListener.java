@@ -2,7 +2,6 @@ package org.web_socket_service.components;
 
 
 import org.springframework.context.event.EventListener;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
@@ -24,11 +23,11 @@ public class WebSocketEventListener {
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectEvent event) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
-        String humanReadableChatId = accessor.getFirstNativeHeader("chatId");
-        String webSocketChatId = accessor.getSessionId();
-        if(humanReadableChatId!=null && webSocketChatId!=null) {
-            activeUserTracker.addConnection( webSocketChatId, humanReadableChatId);
-            temporaryFileStorageService.addSession(humanReadableChatId);
+        String humanReadableSessionId = accessor.getFirstNativeHeader("sessionId");
+        String webSocketSessionId = accessor.getSessionId();
+        if(humanReadableSessionId!=null && webSocketSessionId!=null) {
+            activeUserTracker.addConnection( webSocketSessionId, humanReadableSessionId);
+            temporaryFileStorageService.addSession(humanReadableSessionId);
         }
 
     }
@@ -36,11 +35,11 @@ public class WebSocketEventListener {
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
-        String webSocketChatId = accessor.getSessionId();
-        if(activeUserTracker.decrementConnection(webSocketChatId) == 0){
-            String humanReadableChatId = activeUserTracker.getHumanReadableChatId(webSocketChatId);
-            activeUserTracker.removeConnection(webSocketChatId);
-            temporaryFileStorageService.removeFile(humanReadableChatId);
+        String webSocketSessionId = accessor.getSessionId();
+        if(activeUserTracker.decrementConnection(webSocketSessionId) == 0){
+            String humanReadableSessionId = activeUserTracker.getHumanReadableSessionId(webSocketSessionId);
+            activeUserTracker.removeConnection(webSocketSessionId);
+            temporaryFileStorageService.removeFile(humanReadableSessionId);
         }
     }
 

@@ -1,7 +1,4 @@
-package org.web_socket_service.DTO;
-
-import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
+package org.web_socket_service.DTO.otherServicesDTO;
 
 public class ExecutionServiceExecutionRequest {
 

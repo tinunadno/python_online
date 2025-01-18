@@ -1,4 +1,4 @@
-package org.web_socket_service.DTO;
+package org.web_socket_service.DTO.otherServicesDTO;
 
 public class ExecutionServiceResponse {
 

@@ -10,38 +10,38 @@ public class ActiveUserTracker {
 
     private final ConcurrentHashMap<String, SessionInstance> activeConnections = new ConcurrentHashMap<>();
 
-    public void addConnection(String webSocketChatId, String humanReadableChatId) {
-        if(!activeConnections.containsKey(webSocketChatId)) {
-            activeConnections.put(webSocketChatId, new SessionInstance(humanReadableChatId));
+    public void addConnection(String webSocketSessionId, String humanReadableSessionId) {
+        if(!activeConnections.containsKey(webSocketSessionId)) {
+            activeConnections.put(webSocketSessionId, new SessionInstance(humanReadableSessionId));
         }
-        activeConnections.get(webSocketChatId).addUser();
+        activeConnections.get(webSocketSessionId).addUser();
     }
 
 
-    public int decrementConnection(String chatId) {
-        if(activeConnections.containsKey(chatId)) {
-            return activeConnections.get(chatId).removeUser();
+    public int decrementConnection(String sessionId) {
+        if(activeConnections.containsKey(sessionId)) {
+            return activeConnections.get(sessionId).removeUser();
         }
         return -1;
     }
 
-    public String getHumanReadableChatId(String webSocketChatId) {
-        if(activeConnections.containsKey(webSocketChatId)) {
-            return activeConnections.get(webSocketChatId).getChatId();
+    public String getHumanReadableSessionId(String webSocketSessionId) {
+        if(activeConnections.containsKey(webSocketSessionId)) {
+            return activeConnections.get(webSocketSessionId).getSessionId();
         }
         return null;
     }
 
-    public void removeConnection(String webSocketChatId) {
-        activeConnections.remove(webSocketChatId);
+    public void removeConnection(String webSocketSessionId) {
+        activeConnections.remove(webSocketSessionId);
     }
 
     private static class SessionInstance{
         private final AtomicInteger activeConnectionsCount;
-        private final String chatId;
+        private final String sessionId;
 
-        public SessionInstance(String chatId) {
-            this.chatId = chatId;
+        public SessionInstance(String sessionId) {
+            this.sessionId = sessionId;
             activeConnectionsCount = new AtomicInteger(0);
         }
 
@@ -53,8 +53,8 @@ public class ActiveUserTracker {
             return this.activeConnectionsCount.decrementAndGet();
         }
 
-        public String getChatId() {
-            return chatId;
+        public String getSessionId() {
+            return sessionId;
         }
     }
 }
