@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class TemporaryFileStorageService {
+    //TODO add severity temporary file initialization with file service interaction
     private final ConcurrentHashMap<String, String> sessionFiles = new ConcurrentHashMap<>();
 
     //TODO add real changes applying!
@@ -24,6 +25,9 @@ public class TemporaryFileStorageService {
     }
 
     public String getSessionFile(String fileId){
-        return sessionFiles.get(fileId);
+        if(sessionFiles.containsKey(fileId)){
+            return sessionFiles.get(fileId);
+        }
+        return "";
     }
 }

@@ -21,6 +21,10 @@
     <button onclick="sendMessage()">Отправить</button>
     <button onclick="executeFile()">Исполнить</button>
     <ul id="messages"></ul>
+    <div id="fileContent" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
+        <h3>Актуальная версия файла:</h3>
+        <pre id="fileContentText"></pre> <!-- Тут будет отображаться файл -->
+    </div>
 </div>
 
 <script>
@@ -37,7 +41,7 @@
         const socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
 
-        stompClient.connect({}, function () {
+        stompClient.connect({'chatId': chatId}, function (frame) {
             console.log('Подключено к чату: ' + chatId);
 
             // Отображаем секцию чата
@@ -48,6 +52,11 @@
             // Подписываемся на топик чата
             stompClient.subscribe('/topic/chat/' + chatId, function (message) {
                 showMessage(message.body);
+            });
+
+            // Подписка на получение актуальной версии файла только для этого пользователя
+            stompClient.subscribe('/user/queue/file', function (message) {
+                showFile(message.body);
             });
         });
     }
@@ -65,13 +74,14 @@
             return;
         }
 
-        // Выполняем POST-запрос с chatId в URI
+        // Выполняем POST-запрос с chatId в заголовках
         fetch(`/webSocketServiceController/executeFile/${chatId}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'chatId': chatId  // Передаем chatId в заголовках
             },
-            body: JSON.stringify({}) // Можно оставить пустое тело или передать токен
+            body: JSON.stringify({}) // Тело запроса, можно передать дополнительные данные если нужно
         })
             .then(response => {
                 if (response.ok) {
@@ -90,6 +100,11 @@
         const li = document.createElement('li');
         li.appendChild(document.createTextNode(message));
         messages.appendChild(li);
+    }
+
+    function showFile(fileContent) {
+        const fileContentText = document.getElementById('fileContentText');
+        fileContentText.textContent = fileContent;  // Отображаем полученный файл в <pre> для форматированного текста
     }
 </script>
 </body>

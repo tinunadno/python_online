@@ -1,11 +1,9 @@
 package org.web_socket_service.controllers;
 
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
-import org.web_socket_service.DTO.ExecuteRequest;
 import org.web_socket_service.DTO.ExecutionServiceResponse;
 import org.web_socket_service.services.ExecutionMicroServiceInteractionService;
 

@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.web_socket_service.DTO.ExecuteRequest;
 import org.web_socket_service.DTO.ExecutionServiceExecutionRequest;
 
 import java.util.Map;
@@ -20,6 +19,7 @@ public class ExecutionMicroServiceInteractionService {
         this.temporaryFileStorageService = temporaryFileStorageService;
     }
 
+    //TODO add 404 handling
     public void sendExecutionRequest(String chatId) throws IllegalArgumentException{
         ExecutionServiceExecutionRequest microServiceRequest = new ExecutionServiceExecutionRequest(
                 temporaryFileStorageService.getSessionFile(chatId),
