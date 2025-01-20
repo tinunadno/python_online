@@ -23,9 +23,11 @@ public class ExecutionMicroServiceInteractionService {
     }
 
     public void sendExecutionRequest(String sessionId) throws IllegalArgumentException {
+
         ExecutionServiceExecutionRequest microServiceRequest = new ExecutionServiceExecutionRequest(
                 temporaryFileStorageService.getSessionFile(sessionId),
                 "http://localhost:8080/webSocketServiceController/callback/" + sessionId);
+
         ResponseEntity<Map> response;
         try {
             //TODO do something with microservices url's
