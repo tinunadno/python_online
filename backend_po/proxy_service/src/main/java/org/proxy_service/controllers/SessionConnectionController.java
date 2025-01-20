@@ -1,10 +1,7 @@
 package org.proxy_service.controllers;
 
 import jakarta.validation.Valid;
-import org.proxy_service.DTO.CreateSessionRequest;
-import org.proxy_service.DTO.DeleteSessionRequest;
-import org.proxy_service.DTO.ErrorResponse;
-import org.proxy_service.DTO.SessionConnectionRequest;
+import org.proxy_service.DTO.*;
 import org.proxy_service.services.RequestSendingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,50 +19,59 @@ public class SessionConnectionController {
 
     @Autowired
     RequestSendingService requestSendingService;
-    //I aint really sure for till now where can i plug it
-    private final String servicesAddress = "http://localhost:8080";
+    //TODO add this stuff storage or smth
+    private final String sessionServiceAddress = "http://localhost:8081";
+    private final String webSocketServiceAddress = "http://localhost:8080";
 
     @PostMapping("/joinSession")
     public ResponseEntity<?> joinSession(@Valid @RequestBody SessionConnectionRequest sessionConnectionRequest) {
-        ResponseEntity<Map> response = requestSendingService.sendGetRequest(servicesAddress+"/sessionAPI/joinSession", sessionConnectionRequest);
+        ResponseEntity<Map> sessionServiceResponse = requestSendingService.sendGetRequest(sessionServiceAddress+"/sessionAPI/joinSession", sessionConnectionRequest);
 
-        if(response.getStatusCode() != HttpStatus.OK){
-            return response;
+        if(sessionServiceResponse.getStatusCode() != HttpStatus.OK){
+            return sessionServiceResponse;
         }
 
-        if(response.getBody() == null || response.getBody().get("sessionId") == null){
+        if(sessionServiceResponse.getBody() == null || sessionServiceResponse.getBody().get("sessionId") == null){
             ErrorResponse errorResponse = new ErrorResponse("session service answered with invalid response");
-            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        //web socket connection logic
+        WebSocketConnectionResponse response = new WebSocketConnectionResponse(webSocketServiceAddress, sessionServiceResponse.getBody().get("sessionId").toString());
 
-        return null;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/createSession")
     public ResponseEntity<?> createSession(@Valid @RequestBody CreateSessionRequest createSessionRequest) {
 
-        ResponseEntity<Map> response = requestSendingService.sendPostRequest(servicesAddress+"/sessionAPI/createSession", createSessionRequest);
-        if(response.getStatusCode() == HttpStatus.BAD_REQUEST){
-            return response;
+        ResponseEntity<Map> sessionServiceResponse = requestSendingService.sendPostRequest(sessionServiceAddress+"/sessionAPI/createSession", createSessionRequest);
+        if(sessionServiceResponse.getStatusCode() == HttpStatus.BAD_REQUEST){
+            return sessionServiceResponse;
         }
-        if(response.getBody() == null || response.getBody().get("sessionId") == null){
+        if(sessionServiceResponse.getBody() == null || sessionServiceResponse.getBody().get("sessionId") == null){
             ErrorResponse errorResponse = new ErrorResponse("session service answered with invalid response");
-            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        String sessionId = (String) response.getBody().get("sessionId");
+        String sessionId = (String) sessionServiceResponse.getBody().get("sessionId");
 
-        //some web socket connection logic
+        WebSocketConnectionResponse response = new WebSocketConnectionResponse(webSocketServiceAddress, sessionId);
 
-        return null;
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
     @PostMapping("/deleteSession")
     public ResponseEntity<?> deleteSession(@Valid @RequestBody DeleteSessionRequest deleteSessionRequest) {
-        ResponseEntity<Map> response = requestSendingService.sendPostRequest(servicesAddress+"/sessionAPI/deleteSession", deleteSessionRequest);
-        if(response.getStatusCode() == HttpStatus.BAD_REQUEST){
+
+        CloseWebSocketConnectionRequest closeWebSocketConnectionRequest = new CloseWebSocketConnectionRequest(deleteSessionRequest.getSessionId());
+
+        ResponseEntity<Map> sessionServiceResponse = requestSendingService.sendPostRequest(webSocketServiceAddress+"/webSocketServiceController/removeSessionById", closeWebSocketConnectionRequest);
+        if(sessionServiceResponse.getStatusCode() != HttpStatus.OK){
+            return sessionServiceResponse;
+        }
+
+        ResponseEntity<Map> response = requestSendingService.sendPostRequest(sessionServiceAddress+"/sessionAPI/deleteSession", deleteSessionRequest);
+        if(response.getStatusCode() != HttpStatus.OK){
             return response;
         }
         if(response.getBody() == null || response.getBody().get("sessionId") == null){
@@ -73,9 +79,7 @@ public class SessionConnectionController {
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 
-        //probably some more web socket stuff
-
-        return null;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

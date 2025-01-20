@@ -20,10 +20,7 @@ public class RequestSendingService {
     }
 
     public ResponseEntity<Map> sendPostRequest(String url, Object request){
-
-        Map<String, Object> requestBody = objectMapper.convertValue(request, Map.class);
-
-        return restTemplate.postForEntity(url, requestBody, Map.class);
+        return restTemplate.postForEntity(url, request, Map.class);
     }
 
     public ResponseEntity<Map> sendGetRequest(String url, Object request) {
