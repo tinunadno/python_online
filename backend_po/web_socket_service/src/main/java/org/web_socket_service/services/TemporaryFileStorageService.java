@@ -34,7 +34,7 @@ public class TemporaryFileStorageService {
 
         ResponseEntity<Map> response;
         try {
-            response = microServiceRestInteractionService.sendGetRequest("http://localhost:8082/sessionAPI/getFileDescriptor?sessionId=" + sessionId);
+            response = microServiceRestInteractionService.sendGetRequest("http://localhost:8081/sessionAPI/getSessionFileId?sessionId=" + sessionId);
         }catch(Exception e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
@@ -64,9 +64,7 @@ public class TemporaryFileStorageService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "file service responsed with invalid file");
         }
 
-        if(!sessionFiles.containsKey(sessionId)){
-            sessionFiles.put(sessionId, new SessionFileInstance(fileDescriptor, fileContent));
-        }
+        sessionFiles.put(sessionId, new SessionFileInstance(fileDescriptor, fileContent));
     }
 
     //TODO add real changes applying!

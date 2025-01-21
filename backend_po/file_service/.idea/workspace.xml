@@ -5,24 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13be616a-556a-4e78-bf56-b5a46c077954" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/file_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/JWTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/DTO/DeleteSessionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/DTO/DeleteSessionRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/ProxyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/ProxyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/RequestSendingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/SessionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/JWTService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +147,7 @@
       <option name="presentableId" value="Default" />
       <updated>1735501936815</updated>
       <workItem from="1735501937837" duration="13441000" />
-      <workItem from="1737477430785" duration="5583000" />
+      <workItem from="1737477430785" duration="6161000" />
     </task>
     <servers />
   </component>
