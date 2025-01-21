@@ -21,7 +21,7 @@ public class SessionService {
     private final SessionCreationService sessionCreationService;
     private final RequestSendingService requestSendingService;
     //TODO create a batter way to configure addresses
-    private final String fileServiceAddress = "http://localhost:8080";
+    private final String fileServiceAddress = "http://localhost:8083";
 
     public SessionService(SessionRepository sessionRepository, SessionCreationService sessionCreationService, RequestSendingService requestSendingService, HttpSession httpSession) {
         this.sessionRepository = sessionRepository;

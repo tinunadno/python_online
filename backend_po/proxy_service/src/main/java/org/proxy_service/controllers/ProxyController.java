@@ -25,11 +25,11 @@ public class ProxyController {
     private final String userServiceAddress = "http://localhost:8084";
 
 
+    //TODO add tokens
     @PostMapping("/authentication/register")
     public ResponseEntity<?> userServiceRegister(@RequestBody Map<String, String> request){
         try {
-            String token = jwtService.generateToken("register");
-            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/authentication/register", request, token);
+            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/authentication/register", request);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new ErrorResponse("error appeared while sending request to authentication service: "+e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -38,8 +38,7 @@ public class ProxyController {
     @PostMapping("/authentication/authorize")
     public ResponseEntity<?> userServiceAuthorize(@RequestBody Map<String, String> request){
         try {
-            String token = jwtService.generateToken("authorization");
-            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/authentication/authorize", request, token);
+            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/authentication/authorize", request);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new ErrorResponse("authentication service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -48,8 +47,7 @@ public class ProxyController {
     @PostMapping("/userManagement/deleteUser")
     public ResponseEntity<?> userServiceDeleteUser(@RequestBody Map<String, String> request){
         try {
-            String token = jwtService.generateToken("deleteUser");
-            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/userManagement/deleteUser", request, token);
+            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/userManagement/deleteUser", request);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new ErrorResponse("authentication service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
