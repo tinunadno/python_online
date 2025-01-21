@@ -9,7 +9,7 @@ public class UserRegisterRequest {
     @NotBlank(message = "user name is required")
     private String username;
     @NotBlank(message = "email is required")
-    @Email(message = "email must be valid", flags = { Pattern.Flag.CASE_INSENSITIVE })
+    @Email(message = "e", flags = { Pattern.Flag.CASE_INSENSITIVE })
     private String email;
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password length must be at least 8 characters")
