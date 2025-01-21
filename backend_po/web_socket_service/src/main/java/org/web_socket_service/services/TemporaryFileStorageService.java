@@ -18,10 +18,18 @@ public class TemporaryFileStorageService {
         this.microServiceRestInteractionService = microServiceRestInteractionService;
     }
 
+    public boolean fileExists(String sessionId){
+        return sessionFiles.containsKey(sessionId);
+    }
+
     public void addSession(String sessionId){
         if(sessionFiles.containsKey(sessionId)){
             return;
         }
+
+        //it's necessary, if file service is not available
+        sessionFiles.put(sessionId, new SessionFileInstance("", ""));
+
         //TODO do something with microservices url's
 
         ResponseEntity<Map> response;
@@ -73,12 +81,13 @@ public class TemporaryFileStorageService {
     public void closeTemporarySessionStorage(String fileId){
 
         String fileDescriptor = sessionFiles.get(fileId).getFileDescriptor();
-        String fileContent = sessionFiles.get(fileId).getFileContent();
+        if(!fileDescriptor.isEmpty()) {
+            String fileContent = sessionFiles.get(fileId).getFileContent();
 
-        FileServiceUpdateFileContentRequest request = new FileServiceUpdateFileContentRequest(fileDescriptor, fileContent);
+            FileServiceUpdateFileContentRequest request = new FileServiceUpdateFileContentRequest(fileDescriptor, fileContent);
 
-        microServiceRestInteractionService.sendPostRequest("http://localhost:8083/fileAPI/updateFileContent", request);
-
+            microServiceRestInteractionService.sendPostRequest("http://localhost:8083/fileAPI/updateFileContent", request);
+        }
         sessionFiles.remove(fileId);
     }
 

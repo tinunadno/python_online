@@ -52,11 +52,7 @@ public class WebSocketServiceController {
 
     @PostMapping("/removeSessionById")
     public ResponseEntity<?> removeSessionById(@RequestBody DeleteSessionRequest deleteSessionRequest) {
-        try{
-            activeSessionTracker.removeSessionByHumanReadableId(deleteSessionRequest.getSessionId());
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        topicMessageSender.disconnectSession(deleteSessionRequest.getSessionId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
