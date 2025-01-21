@@ -10,7 +10,7 @@ import org.user_db_service.services.UserAuthenticationService;
 import org.user_db_service.DTO.ErrorResponse;
 
 @RestController
-@RequestMapping("/Authentication")
+@RequestMapping("/authentication")
 public class AuthenticationController {
 
     UserAuthenticationService userAuthenticationService;
@@ -34,7 +34,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserRegisterRequest request) {
         try {
-            Long userId = userAuthenticationService.RegisterUser(request);
+                Long userId = userAuthenticationService.RegisterUser(request);
             OkResponse response = new OkResponse(userId.toString());
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {

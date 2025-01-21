@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/JWTService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../file_service/src/main/java/org/file_service/DTO/DeleteFileRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/src/main/java/org/file_service/DTO/DeleteFileRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../file_service/target/classes/org/file_service/DTO/DeleteFileRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/target/classes/org/file_service/DTO/DeleteFileRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/session_service/SessionServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/session_service/SessionServiceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/cleanup.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/cleanup.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,37 +46,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.SessionServiceApplicationTests.deleteSessionTestSessionNotExist.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SessionServiceApplicationTests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SessionServiceApplicationTests.joinSessionTestInvalidSessionId.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.SessionServiceApplicationTests.joinSessionTestNormalBehavior.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.SessionServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;session__service__file__creation__feature__branch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/yura/Applications/intellij/ideaProjects/python_online/backend_po/session_service&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.SessionServiceApplicationTests.deleteSessionTestSessionNotExist.executor": "Run",
+    "JUnit.SessionServiceApplicationTests.executor": "Run",
+    "JUnit.SessionServiceApplicationTests.joinSessionTestInvalidSessionId.executor": "Debug",
+    "JUnit.SessionServiceApplicationTests.joinSessionTestNormalBehavior.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.SessionServiceApplication.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "inner__security__branch",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/yura/Applications/intellij/ideaProjects/python_online/backend_po/session_service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.session_service.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SessionServiceApplicationTests">
+  <component name="RunManager" selected="Spring Boot.SessionServiceApplication">
     <configuration name="SessionServiceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="session_service" />
       <extension name="coverage">
@@ -181,6 +178,7 @@
       <workItem from="1735801852134" duration="3402000" />
       <workItem from="1735805679603" duration="1907000" />
       <workItem from="1735827696689" duration="330000" />
+      <workItem from="1737477284788" duration="5874000" />
     </task>
     <servers />
   </component>
