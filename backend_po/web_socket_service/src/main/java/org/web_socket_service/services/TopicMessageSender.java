@@ -15,4 +15,9 @@ public class TopicMessageSender {
     public void sendMessage(Object responseBody, String sessionId){
         messagingTemplate.convertAndSend("/topic/session/" + sessionId, responseBody);
     }
+
+    public void disconnectSession(String sessionId){
+        String destination = "/topic/session/" + sessionId + "/disconnect";
+        messagingTemplate.convertAndSend(destination, "DISCONNECT");
+    }
 }
