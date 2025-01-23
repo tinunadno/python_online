@@ -5,17 +5,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.web_socket_service.DTO.otherServicesDTO.FileServiceUpdateFileContentRequest;
+import org.web_socket_service.DTO.otherServicesDTO.GetFileContentRequest;
+import org.web_socket_service.DTO.otherServicesDTO.GetFileDescriptorRequest;
+import org.web_socket_service.components.ServiceProperties;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class TemporaryFileStorageService {
+
     private final MicroServiceRestInteractionService microServiceRestInteractionService;
     private final ConcurrentHashMap<String, SessionFileInstance> sessionFiles = new ConcurrentHashMap<>();
+    private final ServiceProperties serviceProperties;
 
-    public TemporaryFileStorageService(MicroServiceRestInteractionService microServiceRestInteractionService) {
+    public TemporaryFileStorageService(MicroServiceRestInteractionService microServiceRestInteractionService, ServiceProperties serviceProperties) {
         this.microServiceRestInteractionService = microServiceRestInteractionService;
+        this.serviceProperties = serviceProperties;
     }
 
     public boolean fileExists(String sessionId){
@@ -30,11 +36,9 @@ public class TemporaryFileStorageService {
         //it's necessary, if file service is not available
         sessionFiles.put(sessionId, new SessionFileInstance("", ""));
 
-        //TODO do something with microservices url's
-
         ResponseEntity<Map> response;
         try {
-            response = microServiceRestInteractionService.sendGetRequest("http://localhost:8081/sessionAPI/getSessionFileId?sessionId=" + sessionId);
+            response = microServiceRestInteractionService.sendGetRequest(serviceProperties.getSessionServiceName(),serviceProperties.getGetSessionFileDescriptorEndpoint() , new GetFileDescriptorRequest(sessionId));
         }catch(Exception e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
@@ -50,7 +54,7 @@ public class TemporaryFileStorageService {
 
         ResponseEntity<Map> fileServiceResponse;
         try {
-            fileServiceResponse = microServiceRestInteractionService.sendGetRequest("http://localhost:8083/fileAPI/getFileContent?fileId=" + fileDescriptor);
+            fileServiceResponse = microServiceRestInteractionService.sendGetRequest(serviceProperties.getFileServiceName(), serviceProperties.getGetFileContentEndpoint(), new GetFileContentRequest(fileDescriptor));
         }catch(Exception e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
@@ -84,7 +88,7 @@ public class TemporaryFileStorageService {
 
             FileServiceUpdateFileContentRequest request = new FileServiceUpdateFileContentRequest(fileDescriptor, fileContent);
 
-            microServiceRestInteractionService.sendPostRequest("http://localhost:8083/fileAPI/updateFileContent", request);
+            microServiceRestInteractionService.sendPostRequest(serviceProperties.getFileServiceName(), serviceProperties.getUpdateFileContentEndpoint(), request);
         }
         sessionFiles.remove(fileId);
     }
