@@ -6,9 +6,12 @@ public class ExecutionServiceExecutionRequest {
 
     private String responseUrl;
 
-    public ExecutionServiceExecutionRequest(String executableFile, String responseUrl) {
+    private String callbackToken;
+
+    public ExecutionServiceExecutionRequest(String executableFile, String responseUrl, String callbackToken) {
         this.executableFile = executableFile;
         this.responseUrl = responseUrl;
+        this.callbackToken = callbackToken;
     }
 
     public String getExecutableFile() {
@@ -27,5 +30,9 @@ public class ExecutionServiceExecutionRequest {
         this.responseUrl = responseUrl;
     }
 
+
+    public String getCallbackToken() { return callbackToken; }
+
+    public void setCallbackToken(String callbackToken) { this.callbackToken = callbackToken; }
 
 }

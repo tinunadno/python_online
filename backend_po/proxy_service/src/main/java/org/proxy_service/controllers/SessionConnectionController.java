@@ -27,6 +27,7 @@ public class SessionConnectionController {
     }
 
     //probably it would be better if i'll plug file creation here, but I aint really sure about that
+    //TODO add web socket secret key for interaciotn with specific controllers
     //TODO add user webSockets tokens
     @PostMapping("/joinSession")
     public ResponseEntity<?> joinSession(@Valid @RequestBody SessionConnectionRequest sessionConnectionRequest) {
@@ -69,18 +70,11 @@ public class SessionConnectionController {
     //TODO add some validation here, 'cuz even if its not an owner, it will kick all user
     @PostMapping("/deleteSession")
     public ResponseEntity<?> deleteSession(@Valid @RequestBody DeleteSessionRequest deleteSessionRequest) {
-
-//        CloseWebSocketConnectionRequest closeWebSocketConnectionRequest = new CloseWebSocketConnectionRequest(deleteSessionRequest.getSessionId());
-//
-//        try {
-//            requestSendingService.sendPostRequest(webSocketServiceAddress + "/webSocketServiceController/removeSessionById", closeWebSocketConnectionRequest);
-//        } catch (RuntimeException e) {
-//            ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
-//            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
         try {
             ResponseEntity<Map> response = requestSendingService.sendPostRequest(serviceProperties.getSessionServiceName(), serviceProperties.getDeleteSessionEndpoint(), deleteSessionRequest);
 
+            CloseWebSocketConnectionRequest closeWebSocketConnectionRequest = new CloseWebSocketConnectionRequest(deleteSessionRequest.getSessionId());
+            requestSendingService.sendPostRequest(serviceProperties.getWebSocketServiceName(), serviceProperties.getWebSocketCloseSessionEndpoint(), closeWebSocketConnectionRequest);
 
             if (response.getBody() == null || response.getBody().get("sessionId") == null) {
                 ErrorResponse errorResponse = new ErrorResponse("session service answered with invalid response");

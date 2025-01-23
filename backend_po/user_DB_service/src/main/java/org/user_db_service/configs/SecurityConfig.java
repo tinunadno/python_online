@@ -14,6 +14,12 @@ import java.nio.charset.StandardCharsets;
 @Configuration
 public class SecurityConfig {
 
+    private final JwtConfig jwtConfig;
+
+    public SecurityConfig(JwtConfig jwtConfig) {
+        this.jwtConfig = jwtConfig;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -30,7 +36,7 @@ public class SecurityConfig {
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        String secretKey = "my-really-secret-key_______________________secrete_key";
+        String secretKey = jwtConfig.getServiceSecretKey("USER_DB_SERVICE");
         return NimbusJwtDecoder.withSecretKey(getSecretKey(secretKey)).build();
     }
 

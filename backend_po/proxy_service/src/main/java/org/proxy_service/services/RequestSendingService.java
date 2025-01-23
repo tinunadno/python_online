@@ -39,7 +39,7 @@ public class RequestSendingService {
     public ResponseEntity<?> sendPostRequestProxy(String serviceName, String endpoint, Map<String, String> request){
         String serviceUrl = getServiceUrl(serviceName) + endpoint;
 
-        String jwtToken = jwtService.generateToken("proxy post request");
+        String jwtToken = jwtService.generateToken("proxy post request", serviceName);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + jwtToken);
@@ -66,7 +66,7 @@ public class RequestSendingService {
                 requestBody  = objectMapper.convertValue(request, Map.class);
             }
 
-            String jwtToken = jwtService.generateToken("ServicePostRequest");
+            String jwtToken = jwtService.generateToken("ServicePostRequest", serviceName);
 
             HttpHeaders headers = new HttpHeaders();
 
@@ -84,7 +84,7 @@ public class RequestSendingService {
 
     public ResponseEntity<Map> sendGetRequest(String serviceName, String endpoint, Object request) {
         try {
-            String jwtToken = jwtService.generateToken("ServiceGetRequest");
+            String jwtToken = jwtService.generateToken("ServiceGetRequest", serviceName);
 
             String serviceUrl = getServiceUrl(serviceName) + endpoint;
 

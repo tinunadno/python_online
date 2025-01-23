@@ -3,6 +3,7 @@ package org.web_socket_service.services;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
+import org.web_socket_service.configurations.JwtConfig;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -13,17 +14,21 @@ import java.util.Map;
 
 @Service
 public class JWTService {
-    //i'll deal with it later
-    //TODO do something with this
-    private final String SECRET_KEY = "my-really-secret-key_______________________secrete_key";
 
-    public String generateToken(String subject){
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, subject);
+    private final JwtConfig jwtConfig;
+
+    public JWTService(JwtConfig jwtConfig) {
+        this.jwtConfig = jwtConfig;
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
-        byte[] keyBytes = SECRET_KEY.getBytes(StandardCharsets.UTF_8);
+    public String generateToken(String serviceName,String subject){
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, serviceName, subject);
+    }
+
+    private String createToken(Map<String, Object> claims, String serviceName, String subject) {
+        String serviceSecretKey = jwtConfig.getServiceSecretKey(serviceName);
+        byte[] keyBytes = serviceSecretKey.getBytes(StandardCharsets.UTF_8);
         SecretKey secretKey = new SecretKeySpec(keyBytes, "HmacSHA256");
 
         return Jwts.builder()
