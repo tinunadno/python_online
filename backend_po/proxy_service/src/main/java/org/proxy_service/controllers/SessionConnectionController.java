@@ -2,6 +2,7 @@ package org.proxy_service.controllers;
 
 import jakarta.validation.Valid;
 import org.proxy_service.DTO.*;
+import org.proxy_service.components.ServiceProperties;
 import org.proxy_service.services.RequestSendingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,19 +16,22 @@ import java.util.Map;
 @RequestMapping("pythonOnline/sessionConnection")
 public class SessionConnectionController {
 
+    private final RequestSendingService requestSendingService;
+    private final ServiceProperties serviceProperties;
 
-    @Autowired
-    RequestSendingService requestSendingService;
-    //TODO add this stuff storage or smth
-    private final String sessionServiceAddress = "http://localhost:8081";
     private final String webSocketServiceAddress = "http://localhost:8080";
+
+    public SessionConnectionController(RequestSendingService requestSendingService, ServiceProperties serviceProperties) {
+        this.requestSendingService = requestSendingService;
+        this.serviceProperties = serviceProperties;
+    }
 
     //probably it would be better if i'll plug file creation here, but I aint really sure about that
     //TODO add user webSockets tokens
     @PostMapping("/joinSession")
     public ResponseEntity<?> joinSession(@Valid @RequestBody SessionConnectionRequest sessionConnectionRequest) {
         try {
-            ResponseEntity<Map> sessionServiceResponse = requestSendingService.sendGetRequest(sessionServiceAddress + "/sessionAPI/joinSession", sessionConnectionRequest);
+            ResponseEntity<Map> sessionServiceResponse = requestSendingService.sendGetRequest(serviceProperties.getSessionServiceName(), serviceProperties.getJoinSessionEndpoint(), sessionConnectionRequest);
 
             if (sessionServiceResponse.getBody() == null || sessionServiceResponse.getBody().get("sessionId") == null) {
                 ErrorResponse errorResponse = new ErrorResponse("session service answered with invalid response");
@@ -46,7 +50,7 @@ public class SessionConnectionController {
     @PostMapping("/createSession")
     public ResponseEntity<?> createSession(@Valid @RequestBody CreateSessionRequest createSessionRequest) {
         try {
-            ResponseEntity<Map> sessionServiceResponse = requestSendingService.sendPostRequest(sessionServiceAddress + "/sessionAPI/createSession", createSessionRequest);
+            ResponseEntity<Map> sessionServiceResponse = requestSendingService.sendPostRequest(serviceProperties.getSessionServiceName(), serviceProperties.getCreateSessionEndpoint(), createSessionRequest);
             if (sessionServiceResponse.getBody() == null || sessionServiceResponse.getBody().get("sessionId") == null) {
                 ErrorResponse errorResponse = new ErrorResponse("session service answered with invalid response");
                 return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -75,7 +79,7 @@ public class SessionConnectionController {
 //            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
         try {
-            ResponseEntity<Map> response = requestSendingService.sendPostRequest(sessionServiceAddress + "/sessionAPI/deleteSession", deleteSessionRequest);
+            ResponseEntity<Map> response = requestSendingService.sendPostRequest(serviceProperties.getSessionServiceName(), serviceProperties.getDeleteSessionEndpoint(), deleteSessionRequest);
 
 
             if (response.getBody() == null || response.getBody().get("sessionId") == null) {

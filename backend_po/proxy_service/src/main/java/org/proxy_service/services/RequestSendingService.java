@@ -56,8 +56,10 @@ public class RequestSendingService {
         }
     }
 
-    public ResponseEntity<Map> sendPostRequest(String url, Object request){
+    public ResponseEntity<Map> sendPostRequest(String serviceName, String endpoint, Object request){
         try {
+
+            String serviceUrl = getServiceUrl(serviceName) + endpoint;
 
             Map<String, String> requestBody = null;
 
@@ -73,7 +75,7 @@ public class RequestSendingService {
 
             HttpEntity<Map<String, String>> entity = new HttpEntity<>(requestBody, headers);
 
-            return restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
+            return restTemplate.exchange(serviceUrl, HttpMethod.POST, entity, Map.class);
         }catch (HttpStatusCodeException e){
             throw new RuntimeException("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage());
         }catch (Exception e){
@@ -81,11 +83,13 @@ public class RequestSendingService {
         }
     }
 
-    public ResponseEntity<Map> sendGetRequest(String url, Object request) {
+    public ResponseEntity<Map> sendGetRequest(String serviceName, String endpoint, Object request) {
         try {
             String jwtToken = jwtService.generateToken("ServiceGetRequest");
 
-            UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url);
+            String serviceUrl = getServiceUrl(serviceName) + endpoint;
+
+            UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(serviceUrl);
             if (request != null) {
                 Map<String, Object> paramMap = objectMapper.convertValue(request, Map.class);
                 paramMap.forEach(uriBuilder::queryParam);
