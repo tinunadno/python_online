@@ -2,20 +2,20 @@ package org.proxy_service.DTO;
 
 public class WebSocketConnectionResponse {
 
-    private String address;
+    private String webSocketServiceAddress;
     private String sessionId;
 
     public WebSocketConnectionResponse(String address, String sessionId) {
-        this.address = address;
+        this.webSocketServiceAddress = address;
         this.sessionId = sessionId;
     }
 
-    public String getAddress() {
-        return address;
+    public String getWebSocketServiceAddress() {
+        return webSocketServiceAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setWebSocketServiceAddress(String webSocketServiceAddress) {
+        this.webSocketServiceAddress = webSocketServiceAddress;
     }
 
     public String getSessionId() {

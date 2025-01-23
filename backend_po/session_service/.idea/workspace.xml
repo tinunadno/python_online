@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/components/ServiceProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/ProxyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/ProxyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/session_service/components/ServiceProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../file_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../file_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/session_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/session_service/services/RequestSendingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/session_service/services/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/session_service/services/SessionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,7 +183,7 @@
       <workItem from="1735801852134" duration="3402000" />
       <workItem from="1735805679603" duration="1907000" />
       <workItem from="1735827696689" duration="330000" />
-      <workItem from="1737590773859" duration="660000" />
+      <workItem from="1737590773859" duration="1837000" />
     </task>
     <servers />
   </component>

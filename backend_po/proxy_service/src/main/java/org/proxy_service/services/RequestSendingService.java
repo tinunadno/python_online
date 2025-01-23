@@ -1,7 +1,6 @@
 package org.proxy_service.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Jwt;
 import org.proxy_service.DTO.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -20,7 +19,7 @@ public class RequestSendingService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private JWTService jwtService;
+    private final JWTService jwtService;
     private final DiscoveryClient discoveryClient;
 
     @Autowired

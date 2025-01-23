@@ -1,8 +1,8 @@
 package org.session_service.services;
 
-import jakarta.servlet.http.HttpSession;
 import org.session_service.DTO.CreateSessionRequest;
 import org.session_service.DTO.DeleteSessionRequest;
+import org.session_service.components.ServiceProperties;
 import org.session_service.entities.SessionEntity;
 import org.session_service.repositories.SessionRepository;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,18 +19,18 @@ public class SessionService {
     private final SessionRepository sessionRepository;
     private final SessionCreationService sessionCreationService;
     private final RequestSendingService requestSendingService;
-    //TODO create a batter way to configure addresses
-    private final String fileServiceAddress = "http://localhost:8083";
+    private final ServiceProperties serviceProperties;
 
-    public SessionService(SessionRepository sessionRepository, SessionCreationService sessionCreationService, RequestSendingService requestSendingService, HttpSession httpSession) {
+    public SessionService(SessionRepository sessionRepository, SessionCreationService sessionCreationService, RequestSendingService requestSendingService, ServiceProperties serviceProperties) {
         this.sessionRepository = sessionRepository;
         this.sessionCreationService = sessionCreationService;
         this.requestSendingService = requestSendingService;
+        this.serviceProperties = serviceProperties;
     }
 
     public Integer JoinSession(String sessionId) throws IllegalArgumentException {
         //session id format is already validated in controller
-        SessionEntity sessionEntity = sessionRepository.findSessionById(Integer.parseInt(sessionId));;
+        SessionEntity sessionEntity = sessionRepository.findSessionById(Integer.parseInt(sessionId));
         if(sessionEntity == null) {
             throw new IllegalArgumentException("session with this id doesn't exist");
         }
@@ -41,7 +40,7 @@ public class SessionService {
 
     public String getSessionFileId(String sessionId) throws IllegalArgumentException {
         //session id format is already validated in controller
-        SessionEntity sessionEntity = sessionRepository.findSessionById(Integer.parseInt(sessionId));;
+        SessionEntity sessionEntity = sessionRepository.findSessionById(Integer.parseInt(sessionId));
         if(sessionEntity == null) {
             throw new IllegalArgumentException("session with this id doesn't exist");
         }
@@ -52,7 +51,7 @@ public class SessionService {
     public Integer saveSession(CreateSessionRequest createSessionRequest) throws IllegalArgumentException {
         SessionEntity sessionEntity;
         try {
-            ResponseEntity<Map> fileServiceResponse = requestSendingService.sendPostRequest(fileServiceAddress+"/fileAPI/createNewFile", null);
+            ResponseEntity<Map> fileServiceResponse = requestSendingService.sendPostRequest(serviceProperties.getFileServiceName(), serviceProperties.getCreateFileEndpoint(), null);
 
             if(fileServiceResponse.getStatusCode() == HttpStatus.BAD_REQUEST || fileServiceResponse.getStatusCode() != HttpStatus.OK){
                 throw new IllegalArgumentException((fileServiceResponse.getBody().get("message") == null ? "invalid response from file service" : "file service answered with error: "+fileServiceResponse.getBody().get("message").toString()));
@@ -87,7 +86,7 @@ public class SessionService {
         Map<String, String> fileDeleteRequest = new HashMap<>();
         fileDeleteRequest.put("fileId", sessionFileId);
 
-        ResponseEntity<Map> response = requestSendingService.sendPostRequestAsMap(fileServiceAddress+"/fileAPI/deleteFile", fileDeleteRequest);
+        ResponseEntity<Map> response = requestSendingService.sendPostRequestAsMap(serviceProperties.getFileServiceName(),serviceProperties.getDeleteFileEndpoint(), fileDeleteRequest);
         if(response.getStatusCode() == HttpStatus.BAD_REQUEST || response.getStatusCode() != HttpStatus.OK) {
             throw new IllegalArgumentException((response.getBody().get("message") == null ? "invalid response from file service" : "file service answered with error: "+response.getBody().get("message").toString()));
         }
