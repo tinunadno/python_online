@@ -46,7 +46,7 @@ public class MicroServiceRestInteractionService {
             requestBody = objectMapper.convertValue(request, Map.class);
         }
 
-        String jwtToken = jwtService.generateToken("ServicePostRequest");
+        String jwtToken = jwtService.generateToken(serviceName,"ServicePostRequest");
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -59,7 +59,7 @@ public class MicroServiceRestInteractionService {
 
     public ResponseEntity<Map> sendGetRequest(String serviceName, String endpoint, Object request) {
 
-        String jwtToken = jwtService.generateToken("ServiceGetRequest");
+        String jwtToken = jwtService.generateToken(serviceName,"ServiceGetRequest");
 
         String serviceUrl = getServiceUrl(serviceName) + endpoint;
 
