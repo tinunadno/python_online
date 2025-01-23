@@ -1,7 +1,7 @@
 package org.proxy_service.controllers;
 
 import org.proxy_service.DTO.ErrorResponse;
-import org.proxy_service.services.JWTService;
+import org.proxy_service.components.ServiceProperties;
 import org.proxy_service.services.RequestSendingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,19 +17,20 @@ import java.util.Map;
 @RequestMapping("/pythonOnline")
 public class ProxyController {
 
-    @Autowired
-    private RequestSendingService requestSendingService;
-    @Autowired
-    private JWTService jwtService;
-    //TODO add normal service address storage
-    private final String userServiceAddress = "http://localhost:8084";
+    private final RequestSendingService requestSendingService;
+    private final ServiceProperties serviceProperties;
 
+    @Autowired
+    public ProxyController(RequestSendingService requestSendingService, ServiceProperties serviceProperties) {
+        this.requestSendingService = requestSendingService;
+        this.serviceProperties = serviceProperties;
+    }
 
     //TODO add tokens
     @PostMapping("/authentication/register")
     public ResponseEntity<?> userServiceRegister(@RequestBody Map<String, String> request){
         try {
-            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/authentication/register", request);
+            return requestSendingService.sendPostRequestProxy(serviceProperties.getAuthServiceName(), serviceProperties.getAuthRegistrationEndpoint(), request);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new ErrorResponse("error appeared while sending request to authentication service: "+e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -38,7 +39,7 @@ public class ProxyController {
     @PostMapping("/authentication/authorize")
     public ResponseEntity<?> userServiceAuthorize(@RequestBody Map<String, String> request){
         try {
-            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/authentication/authorize", request);
+            return requestSendingService.sendPostRequestProxy(serviceProperties.getAuthServiceName(), serviceProperties.getAuthAuthorizationEndpoint(), request);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new ErrorResponse("authentication service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -47,7 +48,7 @@ public class ProxyController {
     @PostMapping("/userManagement/deleteUser")
     public ResponseEntity<?> userServiceDeleteUser(@RequestBody Map<String, String> request){
         try {
-            return requestSendingService.sendPostRequestProxy(userServiceAddress + "/userManagement/deleteUser", request);
+            return requestSendingService.sendPostRequestProxy(serviceProperties.getAuthServiceName(), serviceProperties.getUserManagementDeleteUserEndpoint(), request);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new ErrorResponse("authentication service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/JWTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/DTO/otherServicesDTO/GetFileContentRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/DTO/otherServicesDTO/GetFileDescriptorRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/components/ServiceProperties.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web_socket_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/TemporaryFileStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/TemporaryFileStorageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.SessionServiceApplication.executor": "Run",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "inner__security__branch",
+    "git-widget-placeholder": "address__storage__fix__branch",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/yura/Applications/intellij/ideaProjects/python_online/backend_po/session_service",
     "node.js.detected.package.eslint": "true",
@@ -178,7 +181,7 @@
       <workItem from="1735801852134" duration="3402000" />
       <workItem from="1735805679603" duration="1907000" />
       <workItem from="1735827696689" duration="330000" />
-      <workItem from="1737477284788" duration="5874000" />
+      <workItem from="1737590773859" duration="3170000" />
     </task>
     <servers />
   </component>
