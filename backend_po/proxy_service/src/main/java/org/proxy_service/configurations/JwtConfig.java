@@ -14,9 +14,11 @@ public class JwtConfig {
 
     public JwtConfig(ServiceProperties serviceProperties,
                      @Value("${USER_DB_SERVICE_KEY}") String userDBServiceKey,
-                     @Value("${SESSION_SERVICE_KEY}") String sessionServiceKey) {
+                     @Value("${SESSION_SERVICE_KEY}") String sessionServiceKey,
+                     @Value("${WEB_SOCKET_SERVICE}") String webSocketServiceKey) {
         availableKeys.put(serviceProperties.getAuthServiceName(), userDBServiceKey);
         availableKeys.put(serviceProperties.getSessionServiceName(), sessionServiceKey);
+        availableKeys.put(serviceProperties.getWebSocketServiceName(), webSocketServiceKey);
     }
 
     public String getServiceSecretKey(String serviceName) {

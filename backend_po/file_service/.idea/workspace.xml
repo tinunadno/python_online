@@ -5,36 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13be616a-556a-4e78-bf56-b5a46c077954" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/configurations/JwtConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../execution_service/src/main/resources/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/file_service/configurations/JwtConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/configurations/JwtConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../proxy_service/src/main/resources/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/configurations/JwtConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../session_service/src/main/resources/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../user_DB_service/src/main/java/org/user_db_service/configs/JwtConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../user_DB_service/src/main/resources/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/JwtConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/resources/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../execution_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/file_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/JWTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/JWTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/DTO/ExecutionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/DTO/ExecutionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/services/PythonExecutionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/services/PythonExecutionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/services/ResponseSenderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/services/ResponseSenderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/components/ServiceProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/components/ServiceProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/configurations/JwtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/configurations/JwtConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/resources/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/resources/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/JWTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/JWTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/src/main/java/org/session_service/services/RequestSendingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_DB_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user_DB_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_DB_service/src/main/java/org/user_db_service/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user_DB_service/src/main/java/org/user_db_service/configs/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/JWTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/JWTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/MicroServiceRestInteractionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/DTO/otherServicesDTO/ExecutionServiceExecutionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/DTO/otherServicesDTO/ExecutionServiceExecutionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/controllers/WebSocketServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/controllers/WebSocketServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/ExecutionMicroServiceInteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/ExecutionMicroServiceInteractionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

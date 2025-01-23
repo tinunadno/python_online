@@ -18,12 +18,14 @@ public class ExecutionMicroServiceInteractionService {
     private final TemporaryFileStorageService temporaryFileStorageService;
     private final TopicMessageSender topicMessageSender;
     private final ServiceProperties serviceProperties;
+    private final JWTService jwtService;
 
-    public ExecutionMicroServiceInteractionService(TemporaryFileStorageService temporaryFileStorageService, TopicMessageSender topicMessageSender, MicroServiceRestInteractionService microServiceRestInteractionService, ServiceProperties serviceProperties) {
+    public ExecutionMicroServiceInteractionService(TemporaryFileStorageService temporaryFileStorageService, TopicMessageSender topicMessageSender, MicroServiceRestInteractionService microServiceRestInteractionService, ServiceProperties serviceProperties, JWTService jwtService) {
         this.temporaryFileStorageService = temporaryFileStorageService;
         this.topicMessageSender = topicMessageSender;
         this.microServiceRestInteractionService = microServiceRestInteractionService;
         this.serviceProperties = serviceProperties;
+        this.jwtService = jwtService;
     }
 
     //i'll just put it here :D
@@ -33,9 +35,11 @@ public class ExecutionMicroServiceInteractionService {
 
     public void sendExecutionRequest(String sessionId) throws IllegalArgumentException {
 
+        //this kinda weird, but its the easiest way to add tokens to callback
         ExecutionServiceExecutionRequest microServiceRequest = new ExecutionServiceExecutionRequest(
                 temporaryFileStorageService.getSessionFile(sessionId),
-                getBaseUrl()+"/webSocketServiceController/callback/" + sessionId);
+                getBaseUrl()+"/webSocketServiceController/callback/" + sessionId,
+                           jwtService.generateToken("WEB_SOCKET_SERVICE", "callBackToken"));
 
         ResponseEntity<Map> response;
         try {

@@ -19,13 +19,11 @@ public class WebSocketServiceController {
     private final TemporaryFileStorageService temporaryFileStorageService;
     private final ExecutionMicroServiceInteractionService executionMicroServiceInteractionService;
     private final TopicMessageSender topicMessageSender;
-    private final ActiveSessionTracker activeSessionTracker;
 
-    public WebSocketServiceController(ExecutionMicroServiceInteractionService executionMicroServiceInteractionService, TemporaryFileStorageService temporaryFileStorageService, TopicMessageSender topicMessageSender, ActiveSessionTracker activeSessionTracker) {
+    public WebSocketServiceController(ExecutionMicroServiceInteractionService executionMicroServiceInteractionService, TemporaryFileStorageService temporaryFileStorageService, TopicMessageSender topicMessageSender) {
         this.executionMicroServiceInteractionService = executionMicroServiceInteractionService;
         this.temporaryFileStorageService = temporaryFileStorageService;
         this.topicMessageSender = topicMessageSender;
-        this.activeSessionTracker = activeSessionTracker;
     }
 
     @PostMapping("/executeFile/{sessionId}")

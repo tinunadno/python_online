@@ -23,6 +23,26 @@ public class ServiceProperties {
 
     private String deleteSessionEndpoint;
 
+    private String webSocketServiceName;
+
+    private String webSocketCloseSessionEndpoint;
+
+    public String getWebSocketServiceName() {
+        return webSocketServiceName;
+    }
+
+    public void setWebSocketServiceName(String webSocketServiceName) {
+        this.webSocketServiceName = webSocketServiceName;
+    }
+
+    public String getWebSocketCloseSessionEndpoint() {
+        return webSocketCloseSessionEndpoint;
+    }
+
+    public void setWebSocketCloseSessionEndpoint(String webSocketCloseSessionEndpoint) {
+        this.webSocketCloseSessionEndpoint = webSocketCloseSessionEndpoint;
+    }
+
     public String getAuthServiceName() {
         return authServiceName;
     }
