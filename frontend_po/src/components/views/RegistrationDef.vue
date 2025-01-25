@@ -1,3 +1,19 @@
+<script>
+export default {
+  data() {
+    return {
+      result_message: 'зарегистрируйтесь',
+      disabled: true,
+    };
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1); // Возвращает пользователя на предыдущую страницу
+    },
+  },
+};
+</script>
+
 <template>
   <div>
     <!-- Кнопка "Назад" за пределами основного блока -->
@@ -6,14 +22,19 @@
     <div class="main_block">
       <div>
         <h1 class="login_text">
-          Вход
+          Регистрация
         </h1>
       </div>
       <div>
-        <form class="login_form">
+        <form class="register_form">
           <div class="input_group">
             <label for="login">Логин: </label>
             <input type="text" v-model="login" class="text_field" id="login" name="login" />
+          </div>
+
+          <div class="input_group">
+            <label for="email">Почта: </label>
+            <input type="email" v-model="email" class="text_field" id="email" name="email" />
           </div>
 
           <div class="input_group">
@@ -21,11 +42,19 @@
             <input type="password" v-model="password" class="text_field" id="password" name="password" />
           </div>
 
-          <div class="button_group">
-            <button :class="{ shake: disabled }" class="button">Войти</button>
+          <div class="input_group">
+            <label for="confirm_password">Повторите пароль: </label>
+            <input
+                type="password"
+                v-model="confirm_password"
+                class="text_field"
+                id="confirm_password"
+                name="confirm_password"
+            />
           </div>
+
           <div class="button_group">
-            <button type="button" class="button">Войти через GOOGLE</button>
+            <button :class="{ shake: disabled }" class="button">Зарегистрироваться</button>
           </div>
           <div>
             <label class="result_message">{{ result_message }}</label>
@@ -35,22 +64,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      result_message: 'введите логин и пароль',
-      disabled: true,
-    };
-  },
-  methods: {
-    goBack() {
-      this.$router.go(-1);; // Возвращает пользователя на предыдущую страницу
-    },
-  },
-};
-</script>
 
 <style scoped>
 @import "../style/form.css";

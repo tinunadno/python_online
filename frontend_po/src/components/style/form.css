@@ -1,3 +1,5 @@
+@import "colors.css";
+
 form {
     display: flex;
     flex-direction: column; /* Основная ось формы — вертикальная */
@@ -12,8 +14,6 @@ form div {
     flex-direction: column; /* Содержимое располагается горизонтально */
     align-items: center; /* Вертикальное выравнивание по центру */
     justify-content: space-between; /* Распределяем элементы */
-    /*background: coral;*/
-    margin: 5px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -23,24 +23,22 @@ form div label {
     text-align: center;
     font-size: 1.1em;
     padding: 5px;
-    color: #e0e0e0;
+    margin-bottom: 0.3em;
+    color: var(--bg-button-color);
 }
 
-input[type="text"], input[type="password"] {
+div input[type="text"], input[type="password"],  input[type="email"] {
+
     flex: 1; /* Растягиваем input, чтобы он занимал оставшееся пространство */
     padding: 10px;
+    width: 100%;
+    text-align: center;
     font-size: 1em;
-    border: 1px solid #555;
-    border-radius: 8px;
-    background-color: #444;
-    color: #f0f0f0;
+    border: 1px solid var(--bg-button-color);
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     transition: background-color 0.3s ease;
-}
-
-input[type="text"]:focus {
-    background-color: #555;
-    border-color: #003366; /* Темно-синий цвет */
-    outline: none;
 }
 
 input[type="checkbox"] {
