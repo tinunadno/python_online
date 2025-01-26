@@ -28,7 +28,7 @@ public class RequestSendingService {
         this.discoveryClient = discoveryClient;
     }
 
-    private String getServiceUrl(String serviceName) {
+    public String getServiceUrl(String serviceName) {
         List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
         if (instances == null || instances.isEmpty()) {
             throw new IllegalStateException("Service not found: " + serviceName);
@@ -36,7 +36,7 @@ public class RequestSendingService {
         return instances.get(0).getUri().toString();
     }
 
-    public ResponseEntity<?> sendPostRequestProxy(String serviceName, String endpoint, Map<String, String> request){
+    public ResponseEntity<Map> sendPostRequestProxy(String serviceName, String endpoint, Map<String, String> request){
         String serviceUrl = getServiceUrl(serviceName) + endpoint;
 
         String jwtToken = jwtService.generateToken("proxy post request", serviceName);
@@ -46,13 +46,7 @@ public class RequestSendingService {
 
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(request, headers);
 
-        try {
-            return restTemplate.exchange(serviceUrl, HttpMethod.POST, entity, Map.class);
-        } catch (HttpStatusCodeException e) {
-            return new ResponseEntity<>(e.getMessage(), e.getStatusCode());
-        } catch (Exception e) {
-            return new ResponseEntity<>(new ErrorResponse("current service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return  restTemplate.exchange(serviceUrl, HttpMethod.POST, entity, Map.class);
     }
 
     public ResponseEntity<Map> sendPostRequest(String serviceName, String endpoint, Object request){

@@ -4,10 +4,20 @@ public class WebSocketConnectionResponse {
 
     private String webSocketServiceAddress;
     private String sessionId;
+    private String token;
 
-    public WebSocketConnectionResponse(String address, String sessionId) {
-        this.webSocketServiceAddress = address;
+    public WebSocketConnectionResponse(String webSocketServiceAddress, String sessionId, String token) {
+        this.webSocketServiceAddress = webSocketServiceAddress;
         this.sessionId = sessionId;
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getWebSocketServiceAddress() {

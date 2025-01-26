@@ -17,11 +17,13 @@ public class JwtConfig {
                      @Value("${WEB_SOCKET_SERVICE_KEY}") String webSocketServiceKey,
                      @Value("${FILE_SERVICE_KEY}") String userDBServiceKey,
                      @Value("${SESSION_SERVICE_KEY}") String sessionServiceKey,
-                     @Value("${EXECUTION_SERVICE_KEY}") String executionServiceKey) {
+                     @Value("${EXECUTION_SERVICE_KEY}") String executionServiceKey,
+                     @Value("${WEB_SOCKET_SERVICE_USER_KEY}") String webSocketServiceUserKey) {
         availableKeys.put("WEB_SOCKET_SERVICE", webSocketServiceKey);
         availableKeys.put(serviceProperties.getFileServiceName(), userDBServiceKey);
         availableKeys.put(serviceProperties.getSessionServiceName(), sessionServiceKey);
         availableKeys.put(serviceProperties.getExecutionServiceName(), executionServiceKey);
+        availableKeys.put("WEB_SOCKET_SERVICE_USER_KEY", webSocketServiceUserKey);
     }
 
     public String getServiceSecretKey(String serviceName) {
