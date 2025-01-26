@@ -3,6 +3,8 @@ package org.proxy_service.controllers;
 import jakarta.validation.Valid;
 import org.proxy_service.DTO.*;
 import org.proxy_service.components.ServiceProperties;
+import org.proxy_service.configurations.JwtConfig;
+import org.proxy_service.services.JWTService;
 import org.proxy_service.services.RequestSendingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +20,14 @@ public class SessionConnectionController {
 
     private final RequestSendingService requestSendingService;
     private final ServiceProperties serviceProperties;
+    private final JWTService jwtService;
+    private final JwtConfig jwtConfig;
 
-    private final String webSocketServiceAddress = "http://localhost:8080";
-
-    public SessionConnectionController(RequestSendingService requestSendingService, ServiceProperties serviceProperties) {
+    public SessionConnectionController(RequestSendingService requestSendingService, ServiceProperties serviceProperties, JWTService jwtService, JwtConfig jwtConfig) {
         this.requestSendingService = requestSendingService;
         this.serviceProperties = serviceProperties;
+        this.jwtService = jwtService;
+        this.jwtConfig = jwtConfig;
     }
 
     //probably it would be better if i'll plug file creation here, but I aint really sure about that
@@ -39,8 +43,8 @@ public class SessionConnectionController {
                 return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
-            WebSocketConnectionResponse response = new WebSocketConnectionResponse(webSocketServiceAddress, sessionServiceResponse.getBody().get("sessionId").toString());
-
+            WebSocketConnectionResponse response = new WebSocketConnectionResponse(requestSendingService.getServiceUrl(serviceProperties.getWebSocketServiceName()), sessionServiceResponse.getBody().get("sessionId").toString(),
+                    jwtService.generateToken(jwtConfig.getServiceSecretKey("WEB_SOCKET_SERVICE_USER_KEY"), sessionConnectionRequest.getSessionId()));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (RuntimeException e) {
             ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
@@ -58,7 +62,8 @@ public class SessionConnectionController {
             }
             String sessionId = (String) sessionServiceResponse.getBody().get("sessionId");
 
-            WebSocketConnectionResponse response = new WebSocketConnectionResponse(webSocketServiceAddress, sessionId);
+            WebSocketConnectionResponse response = new WebSocketConnectionResponse(requestSendingService.getServiceUrl(serviceProperties.getWebSocketServiceName()), sessionId,
+                    jwtService.generateToken(sessionId, "WEB_SOCKET_SERVICE_USER_KEY"));
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (RuntimeException e) {
@@ -67,14 +72,13 @@ public class SessionConnectionController {
         }
     }
 
-    //TODO add some validation here, 'cuz even if its not an owner, it will kick all user
     @PostMapping("/deleteSession")
     public ResponseEntity<?> deleteSession(@Valid @RequestBody DeleteSessionRequest deleteSessionRequest) {
         try {
             ResponseEntity<Map> response = requestSendingService.sendPostRequest(serviceProperties.getSessionServiceName(), serviceProperties.getDeleteSessionEndpoint(), deleteSessionRequest);
 
-            CloseWebSocketConnectionRequest closeWebSocketConnectionRequest = new CloseWebSocketConnectionRequest(deleteSessionRequest.getSessionId());
-            requestSendingService.sendPostRequest(serviceProperties.getWebSocketServiceName(), serviceProperties.getWebSocketCloseSessionEndpoint(), closeWebSocketConnectionRequest);
+            //CloseWebSocketConnectionRequest closeWebSocketConnectionRequest = new CloseWebSocketConnectionRequest(deleteSessionRequest.getSessionId());
+            //requestSendingService.sendPostRequest(serviceProperties.getWebSocketServiceName(), serviceProperties.getWebSocketCloseSessionEndpoint(), closeWebSocketConnectionRequest);
 
             if (response.getBody() == null || response.getBody().get("sessionId") == null) {
                 ErrorResponse errorResponse = new ErrorResponse("session service answered with invalid response");
