@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13be616a-556a-4e78-bf56-b5a46c077954" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/components/TokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/DTO/WebSocketConnectionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/DTO/WebSocketConnectionResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/components/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/components/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/configurations/JwtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/configurations/JwtConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/controllers/SessionConnectionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/services/RequestSendingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/resources/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/resources/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/configurations/CorsConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/JwtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/JwtConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/JWTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/services/JWTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/resources/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/resources/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_po/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_po/src/components/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/src/components/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_po/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_po/src/store/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/src/store/user.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.FileServiceApplication.executor": "Run",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "user__token__branch",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -159,7 +152,7 @@
       <workItem from="1735501937837" duration="13441000" />
       <workItem from="1737477430785" duration="6161000" />
       <workItem from="1737591783516" duration="1483000" />
-      <workItem from="1737887141915" duration="908000" />
+      <workItem from="1737887141915" duration="4461000" />
     </task>
     <servers />
   </component>

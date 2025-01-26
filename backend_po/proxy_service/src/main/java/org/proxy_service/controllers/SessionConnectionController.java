@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.DELETE})
 @RequestMapping("pythonOnline/sessionConnection")
 public class SessionConnectionController {
 
@@ -44,7 +45,7 @@ public class SessionConnectionController {
             }
 
             WebSocketConnectionResponse response = new WebSocketConnectionResponse(requestSendingService.getServiceUrl(serviceProperties.getWebSocketServiceName()), sessionServiceResponse.getBody().get("sessionId").toString(),
-                    jwtService.generateToken(jwtConfig.getServiceSecretKey("WEB_SOCKET_SERVICE_USER_KEY"), sessionConnectionRequest.getSessionId()));
+                    jwtService.generateToken(sessionConnectionRequest.getSessionId(), "WEB_SOCKET_SERVICE_USER_KEY"));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (RuntimeException e) {
             ErrorResponse errorResponse = new ErrorResponse(e.getMessage());

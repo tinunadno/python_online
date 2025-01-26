@@ -22,7 +22,7 @@
           </div>
 
           <div class="button_group">
-            <button :class="{ shake: disabled }" class="button">Войти</button>
+            <button :class="{ shake: disabled }" class="button" @click="logIn">Войти</button>
           </div>
           <div class="button_group">
             <button type="button" class="button">Войти через GOOGLE</button>
@@ -37,16 +37,35 @@
 </template>
 
 <script>
+import {useUserStore} from "@/store/user.js";
+
 export default {
   data() {
+    const userStore = useUserStore();
+
+
     return {
       result_message: 'введите логин и пароль',
       disabled: true,
+      login: "",
+      password: ""
     };
   },
   methods: {
     goBack() {
-      this.$router.go(-1);; // Возвращает пользователя на предыдущую страницу
+      this.$router.push('/');
+    },
+    async logIn (event) {
+      event.preventDefault(); //
+
+      const userData = {
+        username: this.login,
+        password: this.password
+      };
+
+      const userStore = useUserStore();
+      await userStore.login(userData);
+
     },
   },
 };

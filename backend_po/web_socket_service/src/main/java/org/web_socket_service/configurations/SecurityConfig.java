@@ -28,18 +28,18 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/index.html"
+                        .requestMatchers("/**"
                         ).permitAll()
-                        .requestMatchers("/ws/**",
-                                "/app/**",
-                                "/webSocketServiceController/executeFile/**",
-                                "/webSocketServiceController/getFileContent/**",
-                                "/webSocketServiceController/callback/**",
-                                "/webSocketServiceController/removeSessionById").
-                        authenticated()
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
+//                        .requestMatchers("/ws/**",
+//                                "/app/**",
+//                                "/webSocketServiceController/executeFile/**",
+//                                "/webSocketServiceController/getFileContent/**",
+//                                "/webSocketServiceController/callback/**",
+//                                "/webSocketServiceController/removeSessionById").
+//                        authenticated()
+//                        .anyRequest().authenticated()
+                );
+//                .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
