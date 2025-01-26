@@ -1,0 +1,17 @@
+:root {
+    --bg-color: #ffffff;
+    --bg-button-color: #333333;
+    --bg-button-color-hover: #222222;
+    --text-button-color: #ffffff;
+    --text-color: #333333;
+    --bg-color-darker: #eeeeee;
+}
+
+body.dark-theme {
+    --bg-color: #333333;
+    --bg-button-color: #ffffff;
+    --bg-button-color-hover: #dddddd;
+    --text-button-color: #333333;
+    --text-color: #ffffff;
+    --bg-color-darker: #222222;
+}

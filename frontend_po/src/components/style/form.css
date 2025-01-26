@@ -1,0 +1,46 @@
+@import "colors.css";
+
+form {
+    display: flex;
+    flex-direction: column; /* Основная ось формы — вертикальная */
+    justify-content: center; /* Центрирование содержимого */
+    align-items: stretch; /* Растянуть по ширине */
+
+    margin: 0 auto; /* Центрируем форму по горизонтали */
+}
+
+form div {
+    display: flex; /* Включаем flex */
+    flex-direction: column; /* Содержимое располагается горизонтально */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    justify-content: space-between; /* Распределяем элементы */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+form div label {
+    text-align: center;
+    font-size: 1.1em;
+    padding: 5px;
+    margin-bottom: 0.3em;
+    color: var(--bg-button-color);
+}
+
+div input[type="text"], input[type="password"],  input[type="email"] {
+
+    flex: 1; /* Растягиваем input, чтобы он занимал оставшееся пространство */
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    border: 1px solid var(--bg-button-color);
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+input[type="checkbox"] {
+    margin-left: 10px;
+}
