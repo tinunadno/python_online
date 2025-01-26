@@ -28,7 +28,7 @@ public class RequestSendingService {
         this.discoveryClient = discoveryClient;
     }
 
-    private String getServiceUrl(String serviceName) {
+    public String getServiceUrl(String serviceName) {
         List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
         if (instances == null || instances.isEmpty()) {
             throw new IllegalStateException("Service not found: " + serviceName);
