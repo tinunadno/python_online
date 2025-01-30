@@ -3,8 +3,8 @@ package org.user_db_service.services;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.user_db_service.DTO.UserLoginRequest;
-import org.user_db_service.DTO.UserRegisterRequest;
+import org.user_db_service.DTO.requsts.UserLoginRequest;
+import org.user_db_service.DTO.requsts.UserRegisterRequest;
 import org.user_db_service.entities.UserEntity;
 import org.user_db_service.repositories.UserRepository;
 

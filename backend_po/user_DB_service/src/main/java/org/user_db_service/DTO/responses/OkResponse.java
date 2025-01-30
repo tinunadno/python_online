@@ -1,4 +1,4 @@
-package org.user_db_service.DTO;
+package org.user_db_service.DTO.responses;
 
 public class OkResponse {
 

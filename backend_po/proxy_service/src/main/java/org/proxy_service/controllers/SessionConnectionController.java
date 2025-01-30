@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.Map;
 
@@ -31,8 +32,6 @@ public class SessionConnectionController {
     }
 
     //probably it would be better if i'll plug file creation here, but I aint really sure about that
-    //TODO add web socket secret key for interaciotn with specific controllers
-    //TODO add user webSockets tokens
     @PostMapping("/joinSession")
     public ResponseEntity<?> joinSession(@Valid @RequestBody SessionConnectionRequest sessionConnectionRequest) {
         try {
@@ -46,9 +45,10 @@ public class SessionConnectionController {
             WebSocketConnectionResponse response = new WebSocketConnectionResponse(requestSendingService.getServiceUrl(serviceProperties.getWebSocketServiceName()), sessionServiceResponse.getBody().get("sessionId").toString(),
                     jwtService.generateToken(jwtConfig.getServiceSecretKey("WEB_SOCKET_SERVICE_USER_KEY"), sessionConnectionRequest.getSessionId()));
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (HttpStatusCodeException e){
+            return new ResponseEntity<>(new ErrorResponse("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage()), HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse("service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -66,9 +66,10 @@ public class SessionConnectionController {
                     jwtService.generateToken(sessionId, "WEB_SOCKET_SERVICE_USER_KEY"));
 
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (HttpStatusCodeException e){
+            return new ResponseEntity<>(new ErrorResponse("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage()), HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse("service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -86,9 +87,10 @@ public class SessionConnectionController {
             }
 
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (HttpStatusCodeException e){
+            return new ResponseEntity<>(new ErrorResponse("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage()), HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse("service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
