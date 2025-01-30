@@ -21,6 +21,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/pythonOnline/authentication/**",
                                 "/pythonOnline/userManagement/**").permitAll()
                         .anyRequest().authenticated()

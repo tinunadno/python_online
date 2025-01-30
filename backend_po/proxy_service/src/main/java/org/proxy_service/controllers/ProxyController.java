@@ -1,6 +1,9 @@
 package org.proxy_service.controllers;
 
 import org.proxy_service.DTO.ErrorResponse;
+import org.proxy_service.DTO.userDBServiceDTO.UserDeleteRequest;
+import org.proxy_service.DTO.userDBServiceDTO.UserLoginRequest;
+import org.proxy_service.DTO.userDBServiceDTO.UserRegisterRequest;
 import org.proxy_service.components.ServiceProperties;
 import org.proxy_service.services.JWTService;
 import org.proxy_service.services.RequestSendingService;
@@ -32,39 +35,41 @@ public class ProxyController {
 
     //TODO add tokens
     @PostMapping("/authentication/register")
-    public ResponseEntity<?> userServiceRegister(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> userServiceRegister(@RequestBody UserRegisterRequest userRegisterRequest){
         try {
-            ResponseEntity<Map> response = requestSendingService.sendPostRequestProxy(serviceProperties.getAuthServiceName(), serviceProperties.getAuthRegistrationEndpoint(), request);
+            ResponseEntity<Map> response = requestSendingService.sendPostRequest(serviceProperties.getAuthServiceName(), serviceProperties.getAuthRegistrationEndpoint(), userRegisterRequest);
             //if username doesn't exist in request, httpStatusCodeException will appear, 'cuz request is validated in user service
-            response.getBody().put("token", jwtService.generateUserToken(request.get("username")));
+            response.getBody().put("token", jwtService.generateUserToken(userRegisterRequest.getUsername()));
             return response;
-        }catch (HttpStatusCodeException e) {
-            return new ResponseEntity<>(e.getMessage(), e.getStatusCode());
-        } catch (Exception e) {
-            return new ResponseEntity<>(new ErrorResponse("current service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (HttpStatusCodeException e){
+            return new ResponseEntity<>(new ErrorResponse("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage()), HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse("service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/authentication/authorize")
-    public ResponseEntity<?> userServiceAuthorize(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> userServiceAuthorize(@RequestBody UserLoginRequest userLoginRequest){
         try {
-            ResponseEntity<Map> response = requestSendingService.sendPostRequestProxy(serviceProperties.getAuthServiceName(), serviceProperties.getAuthAuthorizationEndpoint(), request);
+            ResponseEntity<Map> response = requestSendingService.sendPostRequest(serviceProperties.getAuthServiceName(), serviceProperties.getAuthAuthorizationEndpoint(), userLoginRequest);
             //if username doesn't exist in request, httpStatusCodeException will appear, 'cuz request is validated in user service
-            response.getBody().put("token", jwtService.generateUserToken(request.get("username")));
+            response.getBody().put("token", jwtService.generateUserToken(userLoginRequest.getUsername()));
             return response;
-        }catch (HttpStatusCodeException e) {
-            return new ResponseEntity<>(e.getMessage(), e.getStatusCode());
-        } catch (Exception e) {
-            return new ResponseEntity<>(new ErrorResponse("current service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (HttpStatusCodeException e){
+            return new ResponseEntity<>(new ErrorResponse("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage()), HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse("service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/userManagement/deleteUser")
-    public ResponseEntity<?> userServiceDeleteUser(@RequestBody Map<String, String> request){
+    public ResponseEntity<?> userServiceDeleteUser(@RequestBody UserDeleteRequest userDeleteRequest){
         try {
-            return requestSendingService.sendPostRequestProxy(serviceProperties.getAuthServiceName(), serviceProperties.getUserManagementDeleteUserEndpoint(), request);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(new ErrorResponse("authentication service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return requestSendingService.sendPostRequest(serviceProperties.getAuthServiceName(), serviceProperties.getUserManagementDeleteUserEndpoint(), userDeleteRequest);
+        }catch (HttpStatusCodeException e){
+            return new ResponseEntity<>(new ErrorResponse("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage()), HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse("service is not available now"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
