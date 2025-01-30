@@ -15,11 +15,9 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class SecurityConfig {
-    private final JwtConfig jwtConfig;
     private final TokenFilter tokenFilter;
 
-    public SecurityConfig(JwtConfig jwtConfig, TokenFilter userTokenFilter) {
-        this.jwtConfig = jwtConfig;
+    public SecurityConfig(TokenFilter userTokenFilter) {
         this.tokenFilter = userTokenFilter;
     }
 
@@ -28,8 +26,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/index.html"
-                        ).permitAll()
+                        .requestMatchers("/index.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/ws/**",
                                 "/app/**",
                                 "/webSocketServiceController/executeFile/**",
