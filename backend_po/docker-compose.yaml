@@ -25,7 +25,7 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
       interval: 20s
       timeout: 3s
       retries: 3
@@ -119,7 +119,7 @@ services:
     volumes:
       - mongo_data:/data/db
     healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')", "--quiet"]
+      test: ["CMD", "sh", "-c", "/usr/bin/mongosh --host localhost --username python_online_host --password python_online_host_IIcX*5966 --authenticationDatabase admin --eval \"db.adminCommand('ping')\""]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -133,13 +133,14 @@ services:
       dockerfile: Dockerfile
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
-      MONGO_DB_URL: mongodb://python_online_host:python_online_host_IIcX*5966@file-service-mongo-db:27017/python_online_file_db
+      MONGODB_CONTAINER_URL: mongodb://python_online_host:python_online_host_IIcX*5966@file-service-mongo-db:27017/python_online_file_db?authSource=admin
+      MONGO_DB_URL: mongodb://python_online_host:python_online_host_IIcX*5966@file-service-mongo-db:27017/python_online_file_db?authSource=admin&retryWrites=true&w=majority
     depends_on:
       file-service-mongo-db:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
-      interval: 20s
+      interval: 5s
       timeout: 3s
       retries: 3
       start_period: 10s
