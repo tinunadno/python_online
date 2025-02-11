@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../eureka_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../eureka_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../execution_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/src/main/java/org/execution_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../execution_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../execution_service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../file_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../file_service/src/main/java/org/file_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/src/main/java/org/file_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../file_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../proxy_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../proxy_service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/session_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/session_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_DB_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user_DB_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_DB_service/src/main/java/org/user_db_service/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user_DB_service/src/main/java/org/user_db_service/configs/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_DB_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../user_DB_service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/java/org/web_socket_service/configurations/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_socket_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../web_socket_service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +180,7 @@
       <workItem from="1737884601846" duration="2304000" />
       <workItem from="1739006434750" duration="6438000" />
       <workItem from="1739260186285" duration="515000" />
-      <workItem from="1739279385439" duration="3129000" />
+      <workItem from="1739279385439" duration="4296000" />
     </task>
     <servers />
   </component>
