@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13be616a-556a-4e78-bf56-b5a46c077954" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../proxy_service/src/main/java/org/proxy_service/configurations/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session_service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend_po/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend_po/src/components/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/src/components/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend_po/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend_po/src/store/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_po/src/store/user.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,30 +43,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.FileServiceApplicationTests.executor": "Run",
-    "JUnit.FileServiceApplicationTests.updateFileContentAndGetFileContentTestNormalBehavior.executor": "Run",
-    "JUnit.FileServiceApplicationTests.updateFileContentTestInvalidId.executor": "Debug",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.FileServiceApplication.executor": "Run",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.FileServiceApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FileServiceApplicationTests.updateFileContentAndGetFileContentTestNormalBehavior.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FileServiceApplicationTests.updateFileContentTestInvalidId.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.file_service [install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.FileServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;documentation__branch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Spring Boot.FileServiceApplication">
+}</component>
+  <component name="RunManager" selected="JUnit.FileServiceApplicationTests">
     <configuration name="FileServiceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="file_service" />
       <extension name="coverage">
@@ -152,7 +149,11 @@
       <workItem from="1735501937837" duration="13441000" />
       <workItem from="1737477430785" duration="6161000" />
       <workItem from="1737591783516" duration="1483000" />
-      <workItem from="1737887141915" duration="4461000" />
+      <workItem from="1737887141915" duration="908000" />
+      <workItem from="1739006193191" duration="742000" />
+      <workItem from="1739260106390" duration="29000" />
+      <workItem from="1739280340248" duration="2538000" />
+      <workItem from="1739303360823" duration="615000" />
     </task>
     <servers />
   </component>
@@ -170,7 +171,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="file_service_branch" />
+                        <option value="documentation_branch" />
                       </list>
                     </value>
                   </entry>

@@ -1,9 +1,9 @@
-package org.user_db_service.DTO;
+package org.user_db_service.DTO.requsts;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import jakarta.validation.constraints.*;
-
-public class UserLoginRequest {
+public class UserDeleteRequest {
     @NotBlank(message = "user name is required")
     private String username;
     @NotBlank(message = "Password is required")
@@ -25,5 +25,4 @@ public class UserLoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

@@ -15,11 +15,9 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class SecurityConfig {
-    private final JwtConfig jwtConfig;
     private final TokenFilter tokenFilter;
 
-    public SecurityConfig(JwtConfig jwtConfig, TokenFilter userTokenFilter) {
-        this.jwtConfig = jwtConfig;
+    public SecurityConfig(TokenFilter userTokenFilter) {
         this.tokenFilter = userTokenFilter;
     }
 
@@ -28,18 +26,20 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/**"
-                        ).permitAll()
-//                        .requestMatchers("/ws/**",
-//                                "/app/**",
-//                                "/webSocketServiceController/executeFile/**",
-//                                "/webSocketServiceController/getFileContent/**",
-//                                "/webSocketServiceController/callback/**",
-//                                "/webSocketServiceController/removeSessionById").
-//                        authenticated()
-//                        .anyRequest().authenticated()
-                );
-//                .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
+                        .requestMatchers( "/**").permitAll()
+                        .requestMatchers("/actuator/health").permitAll()
+                        .requestMatchers("/index.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/ws/**",
+                                "/app/**",
+                                "/webSocketServiceController/executeFile/**",
+                                "/webSocketServiceController/getFileContent/**",
+                                "/webSocketServiceController/callback/**",
+                                "/webSocketServiceController/removeSessionById").
+                        authenticated()
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

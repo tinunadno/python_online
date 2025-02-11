@@ -3,7 +3,7 @@ package org.user_db_service.services;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.user_db_service.DTO.UserDeleteRequest;
+import org.user_db_service.DTO.requsts.UserDeleteRequest;
 import org.user_db_service.entities.UserEntity;
 import org.user_db_service.repositories.UserRepository;
 

@@ -50,7 +50,6 @@ public class RequestSendingService {
     }
 
     public ResponseEntity<Map> sendPostRequest(String serviceName, String endpoint, Object request){
-        try {
 
             String serviceUrl = getServiceUrl(serviceName) + endpoint;
 
@@ -69,36 +68,25 @@ public class RequestSendingService {
             HttpEntity<Map<String, String>> entity = new HttpEntity<>(requestBody, headers);
 
             return restTemplate.exchange(serviceUrl, HttpMethod.POST, entity, Map.class);
-        }catch (HttpStatusCodeException e){
-            throw new RuntimeException("service responsed with code " + e.getStatusCode() +"\nerror message: "+e.getMessage());
-        }catch (Exception e){
-            throw new RuntimeException("service is not available now");
-        }
     }
 
     public ResponseEntity<Map> sendGetRequest(String serviceName, String endpoint, Object request) {
-        try {
-            String jwtToken = jwtService.generateToken("ServiceGetRequest", serviceName);
+        String jwtToken = jwtService.generateToken("ServiceGetRequest", serviceName);
 
-            String serviceUrl = getServiceUrl(serviceName) + endpoint;
+        String serviceUrl = getServiceUrl(serviceName) + endpoint;
 
-            UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(serviceUrl);
-            if (request != null) {
-                Map<String, Object> paramMap = objectMapper.convertValue(request, Map.class);
-                paramMap.forEach(uriBuilder::queryParam);
-            }
-            String finalUrl = uriBuilder.toUriString();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + jwtToken);
-
-            HttpEntity<?> entity = new HttpEntity<>(headers);
-
-            return restTemplate.exchange(finalUrl, HttpMethod.GET, entity, Map.class);
-        } catch (HttpStatusCodeException e) {
-            throw new RuntimeException("Service responded with code " + e.getStatusCode() + "\nError message: " + e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException("Service is not available now");
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(serviceUrl);
+        if (request != null) {
+            Map<String, Object> paramMap = objectMapper.convertValue(request, Map.class);
+            paramMap.forEach(uriBuilder::queryParam);
         }
+        String finalUrl = uriBuilder.toUriString();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + jwtToken);
+
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(finalUrl, HttpMethod.GET, entity, Map.class);
     }
 }
