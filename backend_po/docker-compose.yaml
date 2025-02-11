@@ -1,0 +1,193 @@
+version: "3"
+services:
+  eureka-server:
+    image: "eureka_service"
+    container_name: "eureka_service"
+    build:
+      context: ./eureka_service
+      dockerfile: Dockerfile
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"] 
+      interval: 20s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+
+  execution-service:
+    image: "execution_service"
+    container_name: "execution_service"
+    build:
+      context: ./execution_service
+      dockerfile: Dockerfile
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  user-database:
+    image: postgres:15
+    container_name: user_db_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: python_online_user_database
+      POSTGRES_USER: python_online_host
+      POSTGRES_PASSWORD: python_online_host_IIcX*5966
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "python_online_host", "-d", "python_online_user_database"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - user_pg_data:/var/lib/postgresql/data
+
+  user-db-service:
+    image: "user_db_service"
+    container_name: "user_db_service"
+    build:
+      context: ./user_DB_service
+      dockerfile: Dockerfile
+    depends_on:
+      user-database:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://user-database:5432/python_online_user_database
+      SPRING_DATASOURCE_USERNAME: python_online_host
+      SPRING_DATASOURCE_PASSWORD: python_online_host_IIcX*5966
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  session-database:
+    image: postgres:15
+    container_name: session_db_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: python_online_session_database
+      POSTGRES_USER: python_online_host
+      POSTGRES_PASSWORD: python_online_host_IIcX*5966
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "python_online_host", "-d", "python_online_session_database"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - session_pg_data:/var/lib/postgresql/data
+
+  session-service:
+    image: "session_service"
+    container_name: "session_service"
+    build:
+      context: ./session_service
+      dockerfile: Dockerfile
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      session-database:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://session-database:5432/python_online_session_database
+      SPRING_DATASOURCE_USERNAME: python_online_host
+      SPRING_DATASOURCE_PASSWORD: python_online_host_IIcX*5966
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  file-service-mongo-db:
+    image: mongo:latest
+    container_name: file_service_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: python_online_host
+      MONGO_INITDB_ROOT_PASSWORD: python_online_host_IIcX*5966
+      MONGO_INITDB_DATABASE: python_online_file_db
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')", "--quiet"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  file-service:
+    image: "file_service"
+    container_name: "file_service"
+    build:
+      context: ./file_service
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      MONGO_DB_URL: mongodb://python_online_host:python_online_host_IIcX*5966@file-service-mongo-db:27017/python_online_file_db
+    depends_on:
+      file-service-mongo-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+  
+  web-socket-service:
+    image: "web_socket_service"
+    container_name: "web_socket_service"
+    build:
+      context: ./web_socket_service
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      file-service:
+        condition: service_healthy
+      execution-service:
+        condition: service_healthy
+      session-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    ports:
+      - "8080:8080"
+
+  proxy-service:
+    image: "proxy_service_image"
+    container_name: "proxy_service_container"
+    build:
+      context: ./proxy_service
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      user-db-service:
+        condition: service_healthy
+      session-service:
+        condition: service_healthy
+      web-socket-service:
+        condition: service_healthy
+    ports:
+      - "8085:8085"
+volumes:
+  user_pg_data:
+  session_pg_data:
+  mongo_data:
