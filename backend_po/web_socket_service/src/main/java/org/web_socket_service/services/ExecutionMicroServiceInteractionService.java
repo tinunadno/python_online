@@ -38,7 +38,7 @@ public class ExecutionMicroServiceInteractionService {
         //this kinda weird, but its the easiest way to add tokens to callback
         ExecutionServiceExecutionRequest microServiceRequest = new ExecutionServiceExecutionRequest(
                 temporaryFileStorageService.getSessionFile(sessionId),
-                getBaseUrl()+"/webSocketServiceController/callback/" + sessionId,
+                serviceProperties.getWebsocketServiceName(), "/webSocketServiceController/callback/" + sessionId,
                            jwtService.generateToken("WEB_SOCKET_SERVICE", "callBackToken"));
 
         ResponseEntity<Map> response;

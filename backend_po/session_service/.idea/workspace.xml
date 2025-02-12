@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../file_service/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c3da7130-147b-4993-aa1c-8caae466967d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,32 +41,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.SessionServiceApplicationTests.deleteSessionTestSessionNotExist.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SessionServiceApplicationTests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SessionServiceApplicationTests.joinSessionTestInvalidSessionId.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.SessionServiceApplicationTests.joinSessionTestNormalBehavior.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.session_service [install].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.SessionServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;documentation__branch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/yura/Applications/intellij/ideaProjects/python_online/backend_po/session_service&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.SessionServiceApplicationTests.deleteSessionTestSessionNotExist.executor": "Run",
+    "JUnit.SessionServiceApplicationTests.executor": "Run",
+    "JUnit.SessionServiceApplicationTests.joinSessionTestInvalidSessionId.executor": "Debug",
+    "JUnit.SessionServiceApplicationTests.joinSessionTestNormalBehavior.executor": "Run",
+    "Maven.session_service [install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.SessionServiceApplication.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "no__security",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/yura/Applications/intellij/ideaProjects/python_online/backend_po/session_service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.session_service.services" />
@@ -181,6 +179,7 @@
       <workItem from="1739006434750" duration="6438000" />
       <workItem from="1739260186285" duration="515000" />
       <workItem from="1739279385439" duration="4296000" />
+      <workItem from="1739310006573" duration="306000" />
     </task>
     <servers />
   </component>

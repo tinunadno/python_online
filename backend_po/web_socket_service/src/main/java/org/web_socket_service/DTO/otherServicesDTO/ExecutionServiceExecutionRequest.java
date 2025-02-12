@@ -4,13 +4,16 @@ public class ExecutionServiceExecutionRequest {
 
     private String executableFile;
 
-    private String responseUrl;
+    private String responseServiceName;
+
+    private String responseServiceEndpoint;
 
     private String callbackToken;
 
-    public ExecutionServiceExecutionRequest(String executableFile, String responseUrl, String callbackToken) {
+    public ExecutionServiceExecutionRequest(String executableFile, String responseServiceName, String responseServiceEndpoint, String callbackToken) {
         this.executableFile = executableFile;
-        this.responseUrl = responseUrl;
+        this.responseServiceName = responseServiceName;
+        this.responseServiceEndpoint = responseServiceEndpoint;
         this.callbackToken = callbackToken;
     }
 
@@ -22,14 +25,21 @@ public class ExecutionServiceExecutionRequest {
         this.executableFile = executableFile;
     }
 
-    public String getResponseUrl() {
-        return responseUrl;
+    public String getResponseServiceName() {
+        return responseServiceName;
     }
 
-    public void setResponseUrl(String responseUrl) {
-        this.responseUrl = responseUrl;
+    public void setResponseServiceName(String responseServiceName) {
+        this.responseServiceName = responseServiceName;
     }
 
+    public String getResponseServiceEndpoint() {
+        return responseServiceEndpoint;
+    }
+
+    public void setResponseServiceEndpoint(String responseServiceEndpoint) {
+        this.responseServiceEndpoint = responseServiceEndpoint;
+    }
 
     public String getCallbackToken() { return callbackToken; }
 

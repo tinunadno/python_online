@@ -41,7 +41,7 @@ public class PythonExecutionService {
             }catch (InterruptedException e){
                 executionResponse = new ExecutionResponse("server stopped working on execution", e.getMessage());
             }
-            responseSenderService.sendResponse(executionResponse, executionRequest.getResponseUrl(), executionRequest.getCallbackToken());
+            responseSenderService.sendResponse(executionResponse, executionRequest.getResponseServiceName(), executionRequest.getResponseServiceEndpoint(), executionRequest.getCallbackToken());
         });
     }
 

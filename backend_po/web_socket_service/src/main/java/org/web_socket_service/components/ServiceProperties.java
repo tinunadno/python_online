@@ -17,6 +17,16 @@ public class ServiceProperties {
     private String executionServiceName;
     private String executeFileEndpoint;
 
+    private String websocketServiceName;
+
+    public String getWebsocketServiceName() {
+        return websocketServiceName;
+    }
+
+    public void setWebsocketServiceName(String websocketServiceName) {
+        this.websocketServiceName = websocketServiceName;
+    }
+
     public String getExecuteFileEndpoint() {
         return executeFileEndpoint;
     }
