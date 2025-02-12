@@ -47,6 +47,7 @@ export default {
         const cursor = editor.getCursor(); // Получаем текущую позицию курсора
         const newChar = change.text[0]; // Новый введённый символ
         console.log(`Введён символ: "${newChar}" на позиции: строка ${cursor.line + 1}, столбец ${cursor.ch}`);
+
       }
     });
   },

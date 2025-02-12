@@ -1,6 +1,9 @@
 <script>
 import PythonEditor from "@/components/parts/PythonEditor.vue";
 import Menu from "@/components/parts/menu.vue";
+import axios from 'axios';
+import SockJS from 'sockjs-client';
+import {Stomp} from '@stomp/stompjs';
 
 export default {
   components: { Menu, PythonEditor },
@@ -12,6 +15,7 @@ export default {
       code: 'print("Hello, World!")',
       commandArgs: "", // Аргументы командной строки
       consoleOutput: "", // Вывод в консоль
+      command: "",
       editorOptions: {
         mode: 'python',
         theme: '3024-day',
@@ -42,8 +46,64 @@ export default {
       this.$router.push('/registration');
     },
     runCode() {
-      const output = `>>> Аргументы: ${this.commandArgs}\n>>> Результат: Hello, World!`;
-      this.consoleOutput = output;
+      this.consoleOutput = `>>> Аргументы: ${this.commandArgs}\n>>> Результат: Hello, World!`;
+    },
+    async connection() {
+      let session_data = {
+        sessionId: this.command,
+        userId: sessionStorage.getItem("userId")
+      }
+
+      await axios
+          .post(
+              "http://localhost:8085/pythonOnline/sessionConnection/joinSession",
+              session_data,
+              {
+                headers: {
+                  'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json'
+                }
+              })
+          .then((response) => {
+            sessionStorage.setItem('webSocketServiceAddress', response.data.webSocketServiceAddress);
+            sessionStorage.setItem('sessionId', response.data.sessionId);
+            sessionStorage.setItem('socketToken', response.data.token);
+            console.log("joinSession OK")
+          })
+          .catch((error) => {
+            console.error('Ошибка при входе:', error);
+            this.result_message = "Ошибка входа"
+          })
+
+      await axios
+          .get(
+              "http://localhost:8080/webSocketServiceController/getFileContent/" + sessionStorage.getItem("sessionId"),
+              )
+          .then((response) => {
+            console.log(response.data.text)
+          })
+          .catch((error) => {
+            console.error('Ошибка при входе:', error);
+            this.result_message = "Ошибка входа"
+          })
+
+
+      let currentChatId = sessionStorage.getItem("sessionId");
+      const socket = new SockJS('http://localhost:8080/ws');
+      let stompClient = Stomp.over(socket);
+
+      stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        stompClient.subscribe('/topic/session/' + currentChatId, function (message) {
+          // console.log("Received message: " + message.body); // Выводим сообщение в консоль
+          // this.code += message.`body.messageType
+          let body_message = JSON.parse(message.body)
+          this.code = body_message.body.message
+          console.log(this.code)
+        });
+      });
     },
   },
 };
@@ -88,8 +148,8 @@ export default {
         <PythonEditor ref="codeEditor" class="code-editor" v-model="code" :options="editorOptions" />
         <div class="to-execute">
           <button @click="runCode">Run</button>
-          <button>$</button>
-          <input type="text" id="command" placeholder="Command Line Arguments...">
+          <button @click="connection">$</button>
+          <input type="text" id="command" v-model="command" placeholder="Command Line Arguments...">
         </div>
 
         <!-- Консольный вывод -->
@@ -260,10 +320,6 @@ button {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: monospace;
-}
-
-.to-execute input[type="text"]::placeholder {
-  //color: var(--text-color-secondary);
 }
 
 .console-output {

@@ -13,6 +13,7 @@ import org.web_socket_service.services.TemporaryFileStorageService;
 import org.web_socket_service.services.TopicMessageSender;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.DELETE})
 @RequestMapping("/webSocketServiceController")
 public class WebSocketServiceController {
 
